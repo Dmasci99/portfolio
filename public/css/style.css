@@ -1,0 +1,2488 @@
+/**
+* Author : Daniel Masci - 200299037
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Rich Freeman / Tom Tsiliopolous
+* Purpose : Assignment 1 - Express Portfolio
+* Website Name : MasciApps
+*/
+/**
+* The follwing stylesheet is the "MASTER". It is a Less file that gets auto-compiled into
+* style.css. It uses @import to include other less files that are included. Everything in
+* THIS file is of my own creation. The GLOBAL mixins are from a Project Template that I 
+* created for my Summer Co-op; customized to this site. 
+*
+* moby.less/moby.js are files from my coworker. It is not my creation. You can see/download 
+* it on Github here: https://github.com/joshsanger/moby.js. It controls the Mobile Menu (when 
+* you get below 640px width)
+*/
+/**
+* See style.less comments
+* NOT MY CODE
+* Taken from : https://github.com/joshsanger/moby.js
+* However, portions have been 'hacked' to fit the design of my portfolio. Also
+* minor changes made to positioning.
+*/
+#moby-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+}
+#moby-overlay.dark {
+  background: rgba(0, 0, 0, 0.85);
+}
+#moby-overlay.light {
+  background: rgba(255, 255, 255, 0.65);
+}
+#moby-overlay.moby-overlay-active {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.moby-body-fixed {
+  overflow: hidden !important;
+}
+#moby {
+  background: #3d4766;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  transition: all 0.4s;
+  padding: 20px;
+  overflow: auto;
+}
+#moby.right-side {
+  position: fixed;
+  z-index: 3000;
+  top: 0;
+  height: 100%;
+  right: -300px;
+  width: 280px;
+  border-left: solid 1px rgba(0, 0, 0, 0.08);
+}
+#moby.right-side.moby-active {
+  right: 0 !important;
+}
+#moby ul {
+  list-style: none;
+}
+#moby ul ul {
+  display: none;
+}
+#moby ul ul li a {
+  border-left: 1px solid #0f1f4d;
+  background: #3d4766;
+}
+#moby ul ul li a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left-color: #0f1f4d;
+}
+#moby ul li ul a {
+  padding: 10px 60px 10px 20px;
+}
+#moby ul li a {
+  border-bottom: solid 1px #0f1f4d;
+  position: relative;
+  color: #d4cde5;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 300;
+  display: block;
+  padding: 10px 60px 10px 0;
+}
+#moby ul li a .moby-expand {
+  position: absolute;
+  background: #0f1f4d;
+  width: 40px;
+  text-align: center;
+  top: 0;
+  right: 0;
+  height: 100%;
+  padding: 10px;
+}
+#moby ul li a .moby-expand span {
+  font-size: 12px;
+}
+#moby ul li a .moby-expand i,
+#moby ul li a .moby-expand span {
+  width: 40px;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  -webkit-tranform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+#moby #moby-close {
+  color: #d4cde5;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+#moby #moby-close span {
+  font-weight: bold;
+  margin-right: 10px;
+}
+/****************************************************************************************************
+*																									*
+*											GLOBAL 										
+*																									*
+****************************************************************************************************/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+}
+a,
+img,
+button,
+input,
+textarea {
+  outline: none;
+  border: 0;
+}
+a {
+  text-decoration: none;
+}
+p {
+  color: #0f1f4d;
+  line-height: 1.5em;
+  margin-bottom: 30px;
+}
+ul,
+ol {
+  list-style: none;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  height: calc(100% - 172px);
+  overflow-x: hidden;
+}
+/******* Font Manipulations ********/
+.thin {
+  font-weight: 100;
+}
+.light {
+  font-weight: 300;
+}
+.normal {
+  font-weight: 400;
+}
+.semi-bold {
+  font-weight: 600;
+}
+.bold {
+  font-weight: 700;
+}
+.ultra-bold {
+  font-weight: 900;
+}
+.italic {
+  font-style: italic;
+}
+.small {
+  font-size: .8em;
+}
+.big {
+  font-size: 1.1em;
+}
+.large {
+  font-size: 1.3em;
+}
+/******* Mixins ********/
+.clear-float {
+  clear: both;
+  width: 100%;
+  height: 0.001em;
+}
+.container {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  padding: 0 20px;
+}
+.cover {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+/******* Lines / Buttons / Gradients / Other ********/
+.line {
+  width: 80%;
+  margin: 0 auto 30px auto;
+  height: 1px;
+  background: #747474;
+  background: -webkit-gradient(linear, 0 0, 100% 0, from(#ffffff), to(#ffffff), color-stop(50%, #747474));
+}
+.line2 {
+  width: 100%;
+  margin: 0 auto;
+  height: 1px;
+  background: #747474;
+}
+.gradient-blue {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3d5899+0,283d66+100 */
+  background: #3d5899;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #3d5899 0%, #283d66 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3d5899), color-stop(100%, #283d66));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #3d5899 0%, #283d66 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #3d5899 0%, #283d66 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #3d5899 0%, #283d66 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #3d5899 0%, #283d66 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d5899', endColorstr='#283d66', GradientType=0);
+  /* IE6-9 */
+}
+.justify-content {
+  position: relative;
+  text-align: justify;
+  width: 100%;
+}
+.justify-content::after {
+  content: "";
+  width: 100%;
+  display: inline-block;
+}
+.justify-content > li {
+  position: relative;
+  display: inline-block;
+}
+.button1 {
+  text-align: center;
+  margin: 15px 0;
+}
+.button1 a,
+.button1 button,
+.button1 span {
+  color: #f1f1f1;
+  font-size: 14px;
+  background: #3f507f;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 15px 40px;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.button1 a:hover,
+.button1 button:hover,
+.button1 span:hover {
+  cursor: pointer;
+  background: #5065a1;
+}
+.button1.color2 a,
+.button1.color2 button,
+.button1.color2 span {
+  color: #f1f1f1;
+  background: #0f1f4d;
+}
+.button1.color2 a:hover,
+.button1.color2 button:hover,
+.button1.color2 span:hover {
+  background: #173078;
+}
+.button1.color3 a,
+.button1.color3 button,
+.button1.color3 span {
+  color: #f1f1f1;
+  background: #5271cc;
+}
+.button1.color3 a:hover,
+.button1.color3 button:hover,
+.button1.color3 span:hover {
+  background: #3656b5;
+}
+.button1.width a,
+.button1.width button,
+.button1.width span {
+  display: block;
+  width: 200px;
+  padding: 15px;
+  margin: 0 auto;
+}
+@media screen and (max-width: 1160px) {
+  .image:hover::before {
+    height: 100% !important;
+    top: 0 !important;
+  }
+}
+/******* Hack to change the color of Placeholder Text on Form Elements ********/
+/****************************************************************************************************
+*																									*
+*												HEADER MAIN							
+*																									*
+****************************************************************************************************/
+/***********************************									
+*		 	Drop Down Menu 				
+***********************************/
+#header-nav ul li {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#header-nav ul li a {
+  display: block;
+  color: #0f1f4d;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#header-nav ul li a:hover {
+  color: #000000;
+  font-weight: 700;
+}
+#header-nav ul li:hover > a {
+  color: #000000;
+  font-weight: 700;
+}
+/***********************************									
+*			   Header 				
+***********************************/
+header {
+  position: absolute;
+  background: rgba(212, 205, 229, 0.85);
+  border-top: 5px solid #3f507f;
+  border-bottom: 1px solid #3f507f;
+  width: 100%;
+  height: auto;
+  z-index: 10;
+}
+header #header-nav .menu {
+  width: 100%;
+  text-align: center;
+}
+header #header-nav .menu > li {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  padding: 10px 0;
+}
+header #header-nav .menu > li > a {
+  padding: 30px 20px;
+}
+header #header-nav .menu > li > a::after {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: #000000;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+header #header-nav .menu > li > a.active {
+  color: #000000;
+  font-weight: 700;
+}
+header #header-nav .menu > li > a.active::after {
+  opacity: 1;
+  width: 90%;
+}
+header #header-nav .menu > li .sub-menu {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transform: scale(0) translateX(-50%) translateY(0) rotate(0deg);
+  -moz-transform: scale(0) translateX(-50%) translateY(0) rotate(0deg);
+  -ms-transform: scale(0) translateX(-50%) translateY(0) rotate(0deg);
+  -o-transform: scale(0) translateX(-50%) translateY(0) rotate(0deg);
+  transform: scale(0) translateX(-50%) translateY(0) rotate(0deg);
+  padding: 10px 0;
+  background: rgba(212, 205, 229, 0.85);
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  z-index: 1000;
+}
+header #header-nav .menu > li .sub-menu::before {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: -27px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 0;
+  border-top: 5px solid #000000;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+header #header-nav .menu > li .sub-menu > li > a {
+  padding: 10px 20px;
+}
+header #header-nav .menu > li .sub-menu > li > a::after {
+  display: none;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(100% - 10px);
+  border: 5px solid transparent;
+  border-left-color: #232323;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+header #header-nav .menu > li .sub-menu > li > a:hover::after {
+  border-left-color: #747474;
+}
+header #header-nav .menu > li .sub-menu > li .sub-sub-menu {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: -150%;
+  left: 100%;
+  padding: 10px 0;
+  background: rgba(212, 205, 229, 0.85);
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  z-index: 100;
+}
+header #header-nav .menu > li .sub-menu > li .sub-sub-menu > li a {
+  padding: 10px 20px;
+}
+header #header-nav .menu > li .sub-menu > li:hover .sub-sub-menu {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  top: 0;
+  left: 100%;
+}
+header #header-nav .menu > li:hover > a::after {
+  opacity: 1;
+  width: 90%;
+}
+header #header-nav .menu > li:hover .sub-menu {
+  opacity: 1;
+  visibility: visible;
+  top: 100%;
+  left: 50%;
+  -webkit-transform: scale(1) translateX(-50%) translateY(0) rotate(0deg);
+  -moz-transform: scale(1) translateX(-50%) translateY(0) rotate(0deg);
+  -ms-transform: scale(1) translateX(-50%) translateY(0) rotate(0deg);
+  -o-transform: scale(1) translateX(-50%) translateY(0) rotate(0deg);
+  transform: scale(1) translateX(-50%) translateY(0) rotate(0deg);
+}
+header #header-nav .menu > li:hover .sub-menu::before {
+  opacity: 1;
+}
+header #account-nav {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+header #account-nav .menu {
+  width: 100px;
+  background: transparent;
+  text-align: center;
+}
+header #account-nav .menu.loggedin {
+  width: 200px;
+}
+header #account-nav .menu.loggedin p {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f1f4d;
+  text-align: center;
+  padding: 5px;
+  margin: 0;
+}
+header #account-nav .menu li a {
+  border: 2px solid #3f507f;
+  font-size: 13px;
+  font-variant: small-caps;
+  font-weight: 700;
+  display: block;
+  padding: 5px 10px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+header #account-nav .menu li a.register {
+  color: #d4cde5;
+  background: rgba(15, 31, 77, 0.8);
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-top: 0;
+}
+header #account-nav .menu li a.login {
+  color: #0f1f4d;
+  border-bottom: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+header #account-nav .menu li a.logout {
+  width: 50%;
+  float: left;
+  color: #d4cde5;
+  background: rgba(15, 31, 77, 0.8);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 0;
+}
+header #account-nav .menu li a.dashboard {
+  width: 50%;
+  float: left;
+  color: #0f1f4d;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+}
+header #account-nav .menu li a:hover,
+header #account-nav .menu li a.active {
+  background: #c6bcdc;
+}
+header #account-nav .menu li a:hover.register,
+header #account-nav .menu li a.active.register,
+header #account-nav .menu li a:hover.logout,
+header #account-nav .menu li a.active.logout {
+  background: #0f1f4d;
+}
+header #moby-button {
+  display: none;
+  float: right;
+  padding: 20px;
+  cursor: pointer;
+}
+header #moby-button .fa {
+  color: #3f507f;
+  font-size: 42px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+header #moby-button:hover .fa {
+  color: #0f1f4d;
+}
+/****************************************************************************************************
+*																									*
+*												HOME PAGE 										
+*																									*
+****************************************************************************************************/
+#home-page {
+  height: 100%;
+  min-height: 400px;
+  /***********************************									
+	*			Top Banner 				
+	***********************************/
+  /***********************************									
+	*			Top Section 				
+	***********************************/
+}
+#home-page .top-banner {
+  height: 100%;
+}
+#home-page .top-banner .rotator {
+  height: 100%;
+}
+#home-page .top-banner .rotator .slides {
+  position: relative;
+  height: 100%;
+}
+#home-page .top-banner .rotator .slides .slide {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  -ms-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+}
+#home-page .top-banner .rotator .slides .slide .container {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  width: 500px;
+}
+#home-page .top-banner .rotator .slides .slide .container .heading h2 {
+  position: relative;
+  text-align: center;
+  font-size: 32px;
+  color: #ffffff;
+  font-style: italic;
+  font-weight: 400;
+  text-shadow: 1px 1px 30px #000000, 1px 1px #000000;
+  letter-spacing: 0.06em;
+}
+#home-page .top-banner .rotator .slides .slide .container .text p {
+  text-align: center;
+  color: #ffffff;
+  font-size: 16px;
+  text-shadow: 1px 1px 30px #000000, 1px 1px #000000;
+  padding: 20px 0 30px 0;
+}
+#home-page .top-banner .rotator .slides .slide .container .button {
+  text-align: center;
+  margin: 15px 0;
+}
+#home-page .top-banner .rotator .slides .slide .container .button a,
+#home-page .top-banner .rotator .slides .slide .container .button button,
+#home-page .top-banner .rotator .slides .slide .container .button span {
+  color: #f1f1f1;
+  font-size: 14px;
+  background: #3f507f;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 15px 40px;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+}
+#home-page .top-banner .rotator .slides .slide .container .button a:hover,
+#home-page .top-banner .rotator .slides .slide .container .button button:hover,
+#home-page .top-banner .rotator .slides .slide .container .button span:hover {
+  cursor: pointer;
+  background: #5065a1;
+}
+#home-page .top-banner .rotator .slides .slide .container .button.color2 a,
+#home-page .top-banner .rotator .slides .slide .container .button.color2 button,
+#home-page .top-banner .rotator .slides .slide .container .button.color2 span {
+  color: #f1f1f1;
+  background: #0f1f4d;
+}
+#home-page .top-banner .rotator .slides .slide .container .button.color2 a:hover,
+#home-page .top-banner .rotator .slides .slide .container .button.color2 button:hover,
+#home-page .top-banner .rotator .slides .slide .container .button.color2 span:hover {
+  background: #173078;
+}
+#home-page .top-banner .rotator .slides .slide .container .button.color3 a,
+#home-page .top-banner .rotator .slides .slide .container .button.color3 button,
+#home-page .top-banner .rotator .slides .slide .container .button.color3 span {
+  color: #f1f1f1;
+  background: #5271cc;
+}
+#home-page .top-banner .rotator .slides .slide .container .button.color3 a:hover,
+#home-page .top-banner .rotator .slides .slide .container .button.color3 button:hover,
+#home-page .top-banner .rotator .slides .slide .container .button.color3 span:hover {
+  background: #3656b5;
+}
+#home-page .top-banner .rotator .slides .slide .container .button.width a,
+#home-page .top-banner .rotator .slides .slide .container .button.width button,
+#home-page .top-banner .rotator .slides .slide .container .button.width span {
+  display: block;
+  width: 200px;
+  padding: 15px;
+  margin: 0 auto;
+}
+#home-page .top-banner .rotator .slides .slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+#home-page .top-banner .rotator .slides .rotator-controls {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: auto;
+}
+#home-page .top-banner .rotator .slides .rotator-controls .control {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  -webkit-border-radius: 9999px;
+  -moz-border-radius: 9999px;
+  -ms-border-radius: 9999px;
+  -o-border-radius: 9999px;
+  border-radius: 9999px;
+  background: #d4cde5;
+  border: 1px solid #3f507f;
+  margin: 6px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#home-page .top-banner .rotator .slides .rotator-controls .control.active,
+#home-page .top-banner .rotator .slides .rotator-controls .control:hover {
+  cursor: pointer;
+  background: #3f507f;
+}
+#home-page .top-banner .rotator .slides .rotator-arrows {
+  position: absolute;
+  width: 100%;
+  top: 55%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+#home-page .top-banner .rotator .slides .rotator-arrows .container > div {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  padding: 50px;
+}
+#home-page .top-banner .rotator .slides .rotator-arrows .container > div.prev {
+  left: 0;
+  padding-left: 10px;
+}
+#home-page .top-banner .rotator .slides .rotator-arrows .container > div.next {
+  right: 0;
+  padding-right: 10px;
+}
+#home-page .top-banner .rotator .slides .rotator-arrows .container > div .fa {
+  font-size: 62px;
+  color: #d4cde5;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#home-page .top-banner .rotator .slides .rotator-arrows .container > div:hover {
+  cursor: pointer;
+}
+#home-page .top-banner .rotator .slides .rotator-arrows .container > div:hover .fa {
+  font-size: 68px;
+  color: #3f507f;
+}
+/****************************************************************************************************
+*																									*
+*											INTERIOR PAGES 										
+*																									*
+****************************************************************************************************/
+/***********************************									
+*			Interior Header				
+***********************************/
+.interior-header {
+  background: no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 210px;
+  position: relative;
+  -webkit-box-shadow: 0 0 8px #000000;
+  -moz-box-shadow: 0 0 8px #000000;
+  -ms-box-shadow: 0 0 8px #000000;
+  -o-box-shadow: 0 0 8px #000000;
+  box-shadow: 0 0 8px #000000;
+}
+.interior-header .container {
+  height: 100%;
+}
+.interior-header .container h1 {
+  width: 100%;
+  color: #ffffff;
+  font-size: 28px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  text-shadow: 1px 1px 30px #000000, 1px 1px #000000;
+  position: absolute;
+  left: 20px;
+  bottom: 40px;
+}
+.interior-header .container h1::after {
+  content: "";
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 50%;
+  background: #ffffff;
+  height: 3px;
+}
+/***********************************									
+*			Interior 				
+***********************************/
+.interior-page {
+  min-height: calc(100% - 210px);
+  background: #f1f1f1;
+  padding: 60px 0;
+}
+.interior-page .gallery .projects {
+  position: relative;
+  text-align: justify;
+  width: 100%;
+}
+.interior-page .gallery .projects::after {
+  content: "";
+  width: 100%;
+  display: inline-block;
+}
+.interior-page .gallery .projects > li {
+  position: relative;
+  display: inline-block;
+}
+.interior-page .gallery .projects .project {
+  width: 31%;
+  margin: 15px 0;
+}
+.interior-page .gallery .projects .project .image {
+  position: relative;
+  width: 100%;
+  max-height: 220px;
+  overflow: hidden;
+}
+.interior-page .gallery .projects .project .image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.interior-page .gallery .projects .project .image .fa {
+  opacity: 0;
+  color: #d5d5d5;
+  font-size: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  z-index: 1000;
+}
+.interior-page .gallery .projects .project .image::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(70, 70, 70, 0.8);
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  z-index: 100;
+}
+.interior-page .gallery .projects .project .image:hover {
+  cursor: pointer;
+}
+.interior-page .gallery .projects .project .image:hover .fa {
+  opacity: 1;
+  font-size: 28px;
+}
+.interior-page .gallery .projects .project .image:hover::before {
+  height: 28px;
+  top: 37px;
+}
+.interior-page .gallery .projects .project .image.image-scale {
+  overflow: hidden;
+}
+.interior-page .gallery .projects .project .image.image-scale:hover img {
+  -webkit-transform: scale(1.8);
+  -moz-transform: scale(1.8);
+  -ms-transform: scale(1.8);
+  -o-transform: scale(1.8);
+  transform: scale(1.8);
+}
+.interior-page .gallery .projects .project:hover {
+  box-shadow: 0 0 5px #000000;
+}
+.interior-page .gallery .projects .project .text {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 100;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.interior-page .gallery .projects .project .text p {
+  position: relative;
+  top: 10px;
+  color: #ffffff;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 0;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  -ms-transition: all 0.6s;
+  -o-transition: all 0.6s;
+  transition: all 0.6s;
+}
+.interior-page .gallery .projects .project .text .button {
+  position: relative;
+  top: -10px;
+  text-align: center;
+  margin: 15px 0;
+  margin-top: 0;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  -ms-transition: all 0.6s;
+  -o-transition: all 0.6s;
+  transition: all 0.6s;
+}
+.interior-page .gallery .projects .project .text .button a,
+.interior-page .gallery .projects .project .text .button button,
+.interior-page .gallery .projects .project .text .button span {
+  color: #f1f1f1;
+  font-size: 14px;
+  background: #3f507f;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 15px 40px;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.interior-page .gallery .projects .project .text .button a:hover,
+.interior-page .gallery .projects .project .text .button button:hover,
+.interior-page .gallery .projects .project .text .button span:hover {
+  cursor: pointer;
+  background: #5065a1;
+}
+.interior-page .gallery .projects .project .text .button.color2 a,
+.interior-page .gallery .projects .project .text .button.color2 button,
+.interior-page .gallery .projects .project .text .button.color2 span {
+  color: #f1f1f1;
+  background: #0f1f4d;
+}
+.interior-page .gallery .projects .project .text .button.color2 a:hover,
+.interior-page .gallery .projects .project .text .button.color2 button:hover,
+.interior-page .gallery .projects .project .text .button.color2 span:hover {
+  background: #173078;
+}
+.interior-page .gallery .projects .project .text .button.color3 a,
+.interior-page .gallery .projects .project .text .button.color3 button,
+.interior-page .gallery .projects .project .text .button.color3 span {
+  color: #f1f1f1;
+  background: #5271cc;
+}
+.interior-page .gallery .projects .project .text .button.color3 a:hover,
+.interior-page .gallery .projects .project .text .button.color3 button:hover,
+.interior-page .gallery .projects .project .text .button.color3 span:hover {
+  background: #3656b5;
+}
+.interior-page .gallery .projects .project .text .button.width a,
+.interior-page .gallery .projects .project .text .button.width button,
+.interior-page .gallery .projects .project .text .button.width span {
+  display: block;
+  width: 200px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.interior-page .gallery .projects .project .text .button a,
+.interior-page .gallery .projects .project .text .button button,
+.interior-page .gallery .projects .project .text .button span {
+  display: block;
+  width: 200px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.interior-page .gallery .projects .project .text .button a {
+  font-size: 12px;
+  width: 120px;
+}
+.interior-page .gallery .projects .project:hover .text {
+  opacity: 1;
+  visibility: visible;
+}
+.interior-page .gallery .projects .project:hover .text p {
+  top: 0;
+}
+.interior-page .gallery .projects .project:hover .text .button {
+  top: 10px;
+}
+.interior-page .content h2 {
+  color: #0f1f4d;
+  font-size: 28px;
+  font-variant: small-caps;
+  font-weight: 900;
+  padding: 20px 0;
+}
+.interior-page .content p {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5em;
+}
+.interior-page .option-content {
+  display: none;
+}
+.interior-page .option-content.active {
+  display: block;
+}
+.interior-page .trigger {
+  position: relative;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border: 2px solid #3f507f;
+  background: #d4cde5;
+  color: #0f1f4d;
+  font-size: 21px;
+  font-weight: 700;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.interior-page .trigger span {
+  position: absolute;
+  right: 20px;
+  top: 5px;
+  font-size: 28px;
+}
+.interior-page .trigger-content {
+  padding: 20px;
+}
+/***********************************									
+*			About Me 				
+***********************************/
+#about-page .content-nav .options {
+  position: fixed;
+  top: calc(50% + 18px);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 0;
+  z-index: 100;
+}
+#about-page .content-nav .options .option {
+  text-align: right;
+  position: relative;
+  width: 150px;
+  left: -100px;
+  display: block;
+  background: #d4cde5;
+  padding: 15px 10px;
+  margin: 3px 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+#about-page .content-nav .options .option span {
+  color: #ffffff;
+  position: relative;
+  right: 50px;
+}
+#about-page .content-nav .options .option .fa {
+  position: absolute;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-size: 21px;
+  padding-right: 30px;
+}
+#about-page .content-nav .options .option:hover {
+  left: 0;
+  background: #3f507f;
+}
+#about-page .content-nav .options .option.active {
+  background: #3f507f;
+  width: 155px;
+  left: -100px;
+}
+#about-page .content-nav .options .clear-float {
+  display: none;
+}
+/***********************************									
+*			Projects 				
+***********************************/
+/***********************************									
+*			Services 				
+***********************************/
+#services-page {
+  padding: 30px 0 60px 0;
+}
+#services-page .container.content-nav {
+  padding: 30px 20px;
+}
+#services-page .container.content-nav .options {
+  position: relative;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  border: 2px solid #0f1f4d;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3d5899+0,283d66+100 */
+  background: #3d5899;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #3d5899 0%, #283d66 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3d5899), color-stop(100%, #283d66));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #3d5899 0%, #283d66 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #3d5899 0%, #283d66 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #3d5899 0%, #283d66 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #3d5899 0%, #283d66 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d5899', endColorstr='#283d66', GradientType=0);
+  /* IE6-9 */
+}
+#services-page .container.content-nav .options .option {
+  float: left;
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  padding: 30px 40px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#services-page .container.content-nav .options .option span {
+  color: #d4cde5;
+  position: relative;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#services-page .container.content-nav .options .option span::after {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 140%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: #a99bcb;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#services-page .container.content-nav .options .option:hover span,
+#services-page .container.content-nav .options .option.active span {
+  color: #a99bcb;
+}
+#services-page .container.content-nav .options .option:hover span::after,
+#services-page .container.content-nav .options .option.active span::after {
+  opacity: 1;
+  width: 125%;
+}
+/***********************************									
+*			Contact Me 				
+***********************************/
+#contact-page .content {
+  padding: 40px 20px;
+}
+#contact-page .content .left {
+  width: 75%;
+  float: left;
+}
+#contact-page .content .left .text {
+  padding-bottom: 20px;
+}
+#contact-page .content .left .text p {
+  width: 95%;
+  text-align: center;
+  margin: 0 auto;
+}
+#contact-page .content .left form .input.left-half {
+  width: 49%;
+  float: left;
+}
+#contact-page .content .left form .input.right-half {
+  width: 49%;
+  float: right;
+}
+#contact-page .content .left form .input input,
+#contact-page .content .left form .input textarea {
+  display: block;
+  width: 100%;
+  border: 2px solid #3f507f;
+  background: #ffffff;
+  padding: 8px 16px;
+  margin: 8px 0;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+#contact-page .content .left form .input input::-webkit-input-placeholder,
+#contact-page .content .left form .input textarea::-webkit-input-placeholder {
+  color: #5271cc;
+  opacity: 1;
+}
+#contact-page .content .left form .input input:-moz-placeholder,
+#contact-page .content .left form .input textarea:-moz-placeholder {
+  color: #5271cc;
+  opacity: 1;
+}
+#contact-page .content .left form .input input::-moz-placeholder,
+#contact-page .content .left form .input textarea::-moz-placeholder {
+  color: #5271cc;
+  opacity: 1;
+}
+#contact-page .content .left form .input input:-ms-input-placeholder,
+#contact-page .content .left form .input textarea:-ms-input-placeholder {
+  color: #5271cc;
+  opacity: 1;
+}
+#contact-page .content .left form .input textarea {
+  height: 200px;
+  resize: none;
+}
+#contact-page .content .left form .submit {
+  text-align: center;
+  margin: 15px 0;
+}
+#contact-page .content .left form .submit a,
+#contact-page .content .left form .submit button,
+#contact-page .content .left form .submit span {
+  color: #f1f1f1;
+  font-size: 14px;
+  background: #3f507f;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 15px 40px;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+}
+#contact-page .content .left form .submit a:hover,
+#contact-page .content .left form .submit button:hover,
+#contact-page .content .left form .submit span:hover {
+  cursor: pointer;
+  background: #5065a1;
+}
+#contact-page .content .left form .submit.color2 a,
+#contact-page .content .left form .submit.color2 button,
+#contact-page .content .left form .submit.color2 span {
+  color: #f1f1f1;
+  background: #0f1f4d;
+}
+#contact-page .content .left form .submit.color2 a:hover,
+#contact-page .content .left form .submit.color2 button:hover,
+#contact-page .content .left form .submit.color2 span:hover {
+  background: #173078;
+}
+#contact-page .content .left form .submit.color3 a,
+#contact-page .content .left form .submit.color3 button,
+#contact-page .content .left form .submit.color3 span {
+  color: #f1f1f1;
+  background: #5271cc;
+}
+#contact-page .content .left form .submit.color3 a:hover,
+#contact-page .content .left form .submit.color3 button:hover,
+#contact-page .content .left form .submit.color3 span:hover {
+  background: #3656b5;
+}
+#contact-page .content .left form .submit.width a,
+#contact-page .content .left form .submit.width button,
+#contact-page .content .left form .submit.width span {
+  display: block;
+  width: 200px;
+  padding: 15px;
+  margin: 0 auto;
+}
+#contact-page .content .left form .submit a,
+#contact-page .content .left form .submit button,
+#contact-page .content .left form .submit span {
+  display: block;
+  width: 200px;
+  padding: 15px;
+  margin: 0 auto;
+}
+#contact-page .content .left form .submit button {
+  width: 100%;
+}
+#contact-page .content .divider {
+  position: absolute;
+  height: 100%;
+  width: 3px;
+  background: #3f507f;
+  top: 0;
+  left: 87%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+#contact-page .content .divider .social {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+#contact-page .content .divider .social a {
+  display: block;
+  -webkit-border-radius: 9999px;
+  -moz-border-radius: 9999px;
+  -ms-border-radius: 9999px;
+  -o-border-radius: 9999px;
+  border-radius: 9999px;
+}
+#contact-page .content .divider .social a .fa {
+  color: #0f1f4d;
+  font-size: 32px;
+  text-align: center;
+  background: #f1f1f1;
+  border: 3px solid #3f507f;
+  -webkit-border-radius: 9999px;
+  -moz-border-radius: 9999px;
+  -ms-border-radius: 9999px;
+  -o-border-radius: 9999px;
+  border-radius: 9999px;
+  padding: 10px 12px;
+  margin: 7px 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#contact-page .content .divider .social a .fa.fa-linkedin {
+  padding: 9px 12px 11px 12px;
+}
+#contact-page .content .divider .social a .fa.fa-facebook {
+  padding: 11px 18px 7px 16px;
+}
+#contact-page .content .divider .social a .fa.fa-empty {
+  padding: 0;
+  width: 40px;
+  height: 40px;
+}
+#contact-page .content .divider .social a:hover .fa {
+  cursor: pointer;
+  color: #3f507f;
+  font-size: 35px;
+}
+/***********************************									
+*         Login / Register 				
+***********************************/
+#login-page form,
+#register-page form,
+#add-contact form,
+#update-contact form {
+  width: 50%;
+  min-width: 450px;
+  position: relative;
+  margin: 0 auto;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  padding: 10px 60px;
+  background: #ffffff;
+  -webkit-box-shadow: 0 0 16px #747474;
+  -moz-box-shadow: 0 0 16px #747474;
+  -ms-box-shadow: 0 0 16px #747474;
+  -o-box-shadow: 0 0 16px #747474;
+  box-shadow: 0 0 16px #747474;
+}
+#login-page form .input input,
+#register-page form .input input,
+#add-contact form .input input,
+#update-contact form .input input {
+  padding: 5px 10px;
+  margin: 5px 0;
+  background: #ffffff;
+  width: 100%;
+  border: 2px solid #0f1f4d;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+#login-page form .submit,
+#register-page form .submit,
+#add-contact form .submit,
+#update-contact form .submit {
+  text-align: center;
+  margin: 15px 0;
+}
+#login-page form .submit a,
+#register-page form .submit a,
+#add-contact form .submit a,
+#update-contact form .submit a,
+#login-page form .submit button,
+#register-page form .submit button,
+#add-contact form .submit button,
+#update-contact form .submit button,
+#login-page form .submit span,
+#register-page form .submit span,
+#add-contact form .submit span,
+#update-contact form .submit span {
+  color: #f1f1f1;
+  font-size: 14px;
+  background: #3f507f;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 15px 40px;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+}
+#login-page form .submit a:hover,
+#register-page form .submit a:hover,
+#add-contact form .submit a:hover,
+#update-contact form .submit a:hover,
+#login-page form .submit button:hover,
+#register-page form .submit button:hover,
+#add-contact form .submit button:hover,
+#update-contact form .submit button:hover,
+#login-page form .submit span:hover,
+#register-page form .submit span:hover,
+#add-contact form .submit span:hover,
+#update-contact form .submit span:hover {
+  cursor: pointer;
+  background: #5065a1;
+}
+#login-page form .submit.color2 a,
+#register-page form .submit.color2 a,
+#add-contact form .submit.color2 a,
+#update-contact form .submit.color2 a,
+#login-page form .submit.color2 button,
+#register-page form .submit.color2 button,
+#add-contact form .submit.color2 button,
+#update-contact form .submit.color2 button,
+#login-page form .submit.color2 span,
+#register-page form .submit.color2 span,
+#add-contact form .submit.color2 span,
+#update-contact form .submit.color2 span {
+  color: #f1f1f1;
+  background: #0f1f4d;
+}
+#login-page form .submit.color2 a:hover,
+#register-page form .submit.color2 a:hover,
+#add-contact form .submit.color2 a:hover,
+#update-contact form .submit.color2 a:hover,
+#login-page form .submit.color2 button:hover,
+#register-page form .submit.color2 button:hover,
+#add-contact form .submit.color2 button:hover,
+#update-contact form .submit.color2 button:hover,
+#login-page form .submit.color2 span:hover,
+#register-page form .submit.color2 span:hover,
+#add-contact form .submit.color2 span:hover,
+#update-contact form .submit.color2 span:hover {
+  background: #173078;
+}
+#login-page form .submit.color3 a,
+#register-page form .submit.color3 a,
+#add-contact form .submit.color3 a,
+#update-contact form .submit.color3 a,
+#login-page form .submit.color3 button,
+#register-page form .submit.color3 button,
+#add-contact form .submit.color3 button,
+#update-contact form .submit.color3 button,
+#login-page form .submit.color3 span,
+#register-page form .submit.color3 span,
+#add-contact form .submit.color3 span,
+#update-contact form .submit.color3 span {
+  color: #f1f1f1;
+  background: #5271cc;
+}
+#login-page form .submit.color3 a:hover,
+#register-page form .submit.color3 a:hover,
+#add-contact form .submit.color3 a:hover,
+#update-contact form .submit.color3 a:hover,
+#login-page form .submit.color3 button:hover,
+#register-page form .submit.color3 button:hover,
+#add-contact form .submit.color3 button:hover,
+#update-contact form .submit.color3 button:hover,
+#login-page form .submit.color3 span:hover,
+#register-page form .submit.color3 span:hover,
+#add-contact form .submit.color3 span:hover,
+#update-contact form .submit.color3 span:hover {
+  background: #3656b5;
+}
+#login-page form .submit.width a,
+#register-page form .submit.width a,
+#add-contact form .submit.width a,
+#update-contact form .submit.width a,
+#login-page form .submit.width button,
+#register-page form .submit.width button,
+#add-contact form .submit.width button,
+#update-contact form .submit.width button,
+#login-page form .submit.width span,
+#register-page form .submit.width span,
+#add-contact form .submit.width span,
+#update-contact form .submit.width span {
+  display: block;
+  width: 200px;
+  padding: 15px;
+  margin: 0 auto;
+}
+#login-page form .buttons,
+#register-page form .buttons,
+#add-contact form .buttons,
+#update-contact form .buttons {
+  text-align: center;
+  margin: 15px 0;
+}
+#login-page form .buttons a,
+#register-page form .buttons a,
+#add-contact form .buttons a,
+#update-contact form .buttons a,
+#login-page form .buttons button,
+#register-page form .buttons button,
+#add-contact form .buttons button,
+#update-contact form .buttons button,
+#login-page form .buttons span,
+#register-page form .buttons span,
+#add-contact form .buttons span,
+#update-contact form .buttons span {
+  color: #f1f1f1;
+  font-size: 14px;
+  background: #3f507f;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 15px 40px;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+}
+#login-page form .buttons a:hover,
+#register-page form .buttons a:hover,
+#add-contact form .buttons a:hover,
+#update-contact form .buttons a:hover,
+#login-page form .buttons button:hover,
+#register-page form .buttons button:hover,
+#add-contact form .buttons button:hover,
+#update-contact form .buttons button:hover,
+#login-page form .buttons span:hover,
+#register-page form .buttons span:hover,
+#add-contact form .buttons span:hover,
+#update-contact form .buttons span:hover {
+  cursor: pointer;
+  background: #5065a1;
+}
+#login-page form .buttons.color2 a,
+#register-page form .buttons.color2 a,
+#add-contact form .buttons.color2 a,
+#update-contact form .buttons.color2 a,
+#login-page form .buttons.color2 button,
+#register-page form .buttons.color2 button,
+#add-contact form .buttons.color2 button,
+#update-contact form .buttons.color2 button,
+#login-page form .buttons.color2 span,
+#register-page form .buttons.color2 span,
+#add-contact form .buttons.color2 span,
+#update-contact form .buttons.color2 span {
+  color: #f1f1f1;
+  background: #0f1f4d;
+}
+#login-page form .buttons.color2 a:hover,
+#register-page form .buttons.color2 a:hover,
+#add-contact form .buttons.color2 a:hover,
+#update-contact form .buttons.color2 a:hover,
+#login-page form .buttons.color2 button:hover,
+#register-page form .buttons.color2 button:hover,
+#add-contact form .buttons.color2 button:hover,
+#update-contact form .buttons.color2 button:hover,
+#login-page form .buttons.color2 span:hover,
+#register-page form .buttons.color2 span:hover,
+#add-contact form .buttons.color2 span:hover,
+#update-contact form .buttons.color2 span:hover {
+  background: #173078;
+}
+#login-page form .buttons.color3 a,
+#register-page form .buttons.color3 a,
+#add-contact form .buttons.color3 a,
+#update-contact form .buttons.color3 a,
+#login-page form .buttons.color3 button,
+#register-page form .buttons.color3 button,
+#add-contact form .buttons.color3 button,
+#update-contact form .buttons.color3 button,
+#login-page form .buttons.color3 span,
+#register-page form .buttons.color3 span,
+#add-contact form .buttons.color3 span,
+#update-contact form .buttons.color3 span {
+  color: #f1f1f1;
+  background: #5271cc;
+}
+#login-page form .buttons.color3 a:hover,
+#register-page form .buttons.color3 a:hover,
+#add-contact form .buttons.color3 a:hover,
+#update-contact form .buttons.color3 a:hover,
+#login-page form .buttons.color3 button:hover,
+#register-page form .buttons.color3 button:hover,
+#add-contact form .buttons.color3 button:hover,
+#update-contact form .buttons.color3 button:hover,
+#login-page form .buttons.color3 span:hover,
+#register-page form .buttons.color3 span:hover,
+#add-contact form .buttons.color3 span:hover,
+#update-contact form .buttons.color3 span:hover {
+  background: #3656b5;
+}
+#login-page form .buttons.width a,
+#register-page form .buttons.width a,
+#add-contact form .buttons.width a,
+#update-contact form .buttons.width a,
+#login-page form .buttons.width button,
+#register-page form .buttons.width button,
+#add-contact form .buttons.width button,
+#update-contact form .buttons.width button,
+#login-page form .buttons.width span,
+#register-page form .buttons.width span,
+#add-contact form .buttons.width span,
+#update-contact form .buttons.width span {
+  display: block;
+  width: 200px;
+  padding: 15px;
+  margin: 0 auto;
+}
+#login-page form .buttons a,
+#register-page form .buttons a,
+#add-contact form .buttons a,
+#update-contact form .buttons a,
+#login-page form .buttons button,
+#register-page form .buttons button,
+#add-contact form .buttons button,
+#update-contact form .buttons button,
+#login-page form .buttons span,
+#register-page form .buttons span,
+#add-contact form .buttons span,
+#update-contact form .buttons span {
+  display: block;
+  width: 200px;
+  padding: 15px;
+  margin: 0 auto;
+}
+#login-page form .buttons .update,
+#register-page form .buttons .update,
+#add-contact form .buttons .update,
+#update-contact form .buttons .update,
+#login-page form .buttons .delete,
+#register-page form .buttons .delete,
+#add-contact form .buttons .delete,
+#update-contact form .buttons .delete {
+  width: 100px;
+  display: inline-block;
+  margin: 5px;
+}
+#login-page form h2,
+#register-page form h2,
+#add-contact form h2,
+#update-contact form h2 {
+  text-align: center;
+  font-size: 32px;
+  font-variant: small-caps;
+  padding: 10px 0 20px 0;
+}
+#login-page form .exit,
+#register-page form .exit,
+#add-contact form .exit,
+#update-contact form .exit {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+#login-page form .exit a,
+#register-page form .exit a,
+#add-contact form .exit a,
+#update-contact form .exit a {
+  display: block;
+  padding: 20px;
+}
+#login-page form .exit a .fa,
+#register-page form .exit a .fa,
+#add-contact form .exit a .fa,
+#update-contact form .exit a .fa {
+  color: #0f1f4d;
+  font-size: 26px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#login-page form .exit a:hover .fa,
+#register-page form .exit a:hover .fa,
+#add-contact form .exit a:hover .fa,
+#update-contact form .exit a:hover .fa {
+  color: #5a271a;
+  font-size: 32px;
+}
+#login-page .message,
+#register-page .message,
+#add-contact .message,
+#update-contact .message {
+  position: relative;
+  display: block;
+  padding: 5px;
+  text-align: center;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+#login-page .message span,
+#register-page .message span,
+#add-contact .message span,
+#update-contact .message span {
+  position: relative;
+  color: #5a271a;
+  font-size: 14px;
+  font-weight: 700;
+}
+#login-page .message::before,
+#register-page .message::before,
+#add-contact .message::before,
+#update-contact .message::before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  border: 7px solid transparent;
+  border-left-color: #5a271a;
+}
+#login-page .message::after,
+#register-page .message::after,
+#add-contact .message::after,
+#update-contact .message::after {
+  content: "";
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  border: 7px solid transparent;
+  border-right-color: #5a271a;
+}
+/****************************************************************************************************
+*																									*
+*											BACKEND PAGES 										
+*																									*
+****************************************************************************************************/
+/***********************************									
+*			Backend Header				
+***********************************/
+/***********************************									
+*			Backend Pages				
+***********************************/
+/***********************************									
+*			Backend Pages				
+***********************************/
+#contacts-dashboard .add-contact {
+  font-size: 26px;
+  position: absolute;
+  top: 0;
+  right: 20px;
+  padding: 6px 24px;
+  color: #d4cde5;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#contacts-dashboard .add-contact:hover {
+  background: #0f1f4d;
+  color: #ffffff;
+}
+#contacts-dashboard .contact-table table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 2px solid #0f1f4d;
+}
+#contacts-dashboard .contact-table table thead {
+  background: #3f507f;
+}
+#contacts-dashboard .contact-table table thead th {
+  color: #d4cde5;
+  font-size: 18px;
+  font-weight: 700;
+  border: 1px solid #0f1f4d;
+  text-align: center;
+  padding: 10px;
+}
+#contacts-dashboard .contact-table table tbody td {
+  color: #0f1f4d;
+  border: 1px solid #0f1f4d;
+  text-align: center;
+  padding: 10px;
+}
+#contacts-dashboard .contact-table table tbody tr {
+  border: 1px solid #0f1f4d;
+}
+#contacts-dashboard .contact-table table tbody tr:nth-child(even) {
+  background: #d4cde5;
+}
+#contacts-dashboard .contact-table table .update,
+#contacts-dashboard .contact-table table .delete {
+  width: 10px;
+  border: 0;
+}
+#contacts-dashboard .contact-table table .update {
+  padding: 0;
+}
+#contacts-dashboard .contact-table table .update .fa {
+  padding: 10px;
+  color: #629916;
+}
+#contacts-dashboard .contact-table table .update:hover {
+  background: rgba(98, 153, 22, 0.15);
+}
+#contacts-dashboard .contact-table table .update:hover .fa {
+  font-weight: 700;
+}
+#contacts-dashboard .contact-table table .delete {
+  padding: 0;
+}
+#contacts-dashboard .contact-table table .delete .fa {
+  padding: 10px;
+  color: #5a271a;
+}
+#contacts-dashboard .contact-table table .delete:hover {
+  background: rgba(90, 39, 26, 0.15);
+}
+#contacts-dashboard .contact-table table .delete:hover .fa {
+  font-weight: 700;
+}
+/****************************************************************************************************
+*																									*
+*												FOOTER MAIN									
+*																									*
+****************************************************************************************************/
+/***********************************									
+*			Footer 				
+***********************************/
+footer {
+  position: relative;
+  background: #2a3146;
+  padding: 30px 0;
+  z-index: 50;
+  -webkit-box-shadow: 0 0 8px #000000;
+  -moz-box-shadow: 0 0 8px #000000;
+  -ms-box-shadow: 0 0 8px #000000;
+  -o-box-shadow: 0 0 8px #000000;
+  box-shadow: 0 0 8px #000000;
+  text-align: center;
+}
+footer a.home {
+  display: inline-block;
+  position: relative;
+  color: #ffffff;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  padding: 10px 20px;
+  margin-bottom: 25px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+footer a.home:hover {
+  color: #3f507f;
+  font-weight: 700;
+}
+footer .copyright {
+  background: #2e3b5d;
+  padding: 10px 0;
+  display: block;
+  text-align: center;
+  box-shadow: 0 0 5px #000000;
+}
+footer .copyright p {
+  color: #acacac;
+  font-size: 10px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+/*********************************************************************************************************************************************/
+/*																																			 */
+/*																RESPONSIVE 										
+/*																																			 */
+/*********************************************************************************************************************************************/
+/**
+* Author : Daniel Masci - 200299037
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Rich Freeman / Tom Tsiliopolous
+* Purpose : Assignment 1 - Express Portfolio
+* Website Name : MasciApps
+*/
+/**
+* The follwing stylesheet is imported into style.less. This is used specifically for responsive
+* design throughout the entirety of the website.
+*/
+@media screen and (max-width: 1160px) {
+  /****************************************************************************************************
+	*																									*
+	*											INTERIOR PAGES 										
+	*																									*
+	****************************************************************************************************/
+  /***********************************									
+	* 		  Projects Gallery				
+	***********************************/
+  .interior-page .gallery .projects .project .text {
+    opacity: 1;
+    visibility: visible;
+  }
+  .interior-page .gallery .projects .project .text p {
+    top: 0;
+  }
+  .interior-page .gallery .projects .project .text .button {
+    top: 10px;
+  }
+  /***********************************									
+	*			About Me 				
+	***********************************/
+  #about-page .content-nav {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 20px;
+  }
+  #about-page .content-nav .options {
+    position: relative;
+    top: 0;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    left: 0;
+  }
+  #about-page .content-nav .options .option {
+    float: left;
+    position: relative;
+    text-align: left;
+    width: 50px;
+    left: 0;
+    padding: 15px 0px;
+    margin: 0 3px;
+  }
+  #about-page .content-nav .options .option span {
+    position: absolute;
+    opacity: 0;
+    left: 50px;
+    width: 100%;
+  }
+  #about-page .content-nav .options .option .fa {
+    position: relative;
+    left: 40px;
+  }
+  #about-page .content-nav .options .option:hover {
+    left: 0;
+    width: 200px;
+  }
+  #about-page .content-nav .options .option:hover span {
+    opacity: 1;
+  }
+  #about-page .content-nav .options .option.active {
+    width: 50px;
+    left: 0;
+  }
+  #about-page .content-nav .options .clear-float {
+    display: block;
+  }
+}
+@media screen and (max-width: 980px) {
+  /****************************************************************************************************
+	*																									*
+	*												HEADER MAIN									
+	*																									*
+	****************************************************************************************************/
+  header #header-nav .menu {
+    display: none;
+  }
+  header #account-nav {
+    left: 40px;
+    right: auto;
+  }
+  header #moby-button {
+    display: block;
+  }
+  /****************************************************************************************************
+	*																									*
+	*											INTERIOR PAGES 										
+	*																									*
+	****************************************************************************************************/
+  /***********************************									
+	*			Services 				
+	***********************************/
+  #services-page .container.content-nav {
+    padding: 0;
+  }
+  #services-page .container.content-nav .options {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+  }
+  #services-page .container.content-nav .options .option {
+    float: left;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    padding: 30px 40px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  #services-page .container.content-nav .options .option span {
+    color: #d4cde5;
+    position: relative;
+    text-transform: uppercase;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  #services-page .container.content-nav .options .option span::after {
+    opacity: 0;
+    content: "";
+    position: absolute;
+    top: 140%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: #a99bcb;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  #services-page .container.content-nav .options .option:hover span,
+  #services-page .container.content-nav .options .option.active span {
+    color: #a99bcb;
+  }
+  #services-page .container.content-nav .options .option:hover span::after,
+  #services-page .container.content-nav .options .option.active span::after {
+    opacity: 1;
+    width: 125%;
+  }
+}
+@media screen and (max-width: 800px) {
+  /***********************************									
+	*			Project Gallery 				
+	***********************************/
+  .interior-page .gallery .projects .project {
+    width: 48%;
+  }
+}
+@media screen and (max-width: 650px) {
+  body {
+    height: Calc(100% - 174px);
+  }
+  /****************************************************************************************************
+	*																									*
+	*												HOME PAGE 										
+	*																									*
+	****************************************************************************************************/
+  #home-page {
+    /***********************************									
+		*			Top Banner 				
+		***********************************/
+  }
+  #home-page .top-banner .rotator .slides .slide .container {
+    max-width: 80%;
+  }
+  #home-page .top-banner .rotator .slides .slide .container .heading h2 {
+    font-size: 5.8vw;
+  }
+  #home-page .top-banner .rotator .slides .slide .container .text p {
+    font-size: 2.9vw;
+  }
+  #home-page .top-banner .rotator .slides .slide .container .button a {
+    font-size: 2.9vw;
+  }
+  #home-page .top-banner .rotator .slides .rotator-controls {
+    bottom: 25px;
+  }
+  #home-page .top-banner .rotator .slides .rotator-controls .control {
+    width: 20px;
+    height: 20px;
+    margin: 6px;
+  }
+  #home-page .top-banner .rotator .slides .rotator-arrows {
+    display: none;
+  }
+  /****************************************************************************************************
+	*																									*
+	*											INTERIOR PAGES 										
+	*																									*
+	****************************************************************************************************/
+  /***********************************									
+	*			Interior Header				
+	***********************************/
+  .interior-header .container h1 {
+    text-align: center;
+    left: 0;
+  }
+  .interior-header .container h1::after {
+    position: relative;
+    display: block;
+    top: 5px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 70%;
+  }
+  /***********************************									
+	*			Interior 				
+	***********************************/
+  .interior-page .content h2 {
+    padding-top: 40px;
+    text-align: center;
+  }
+  .interior-page .option-content {
+    text-align: center;
+  }
+  .interior-page .trigger {
+    text-align: center;
+  }
+  .interior-page .trigger strong {
+    display: block;
+    width: calc(100% - 40px);
+    position: relative;
+    left: 20px;
+  }
+  .interior-page .trigger-content {
+    text-align: center;
+  }
+  /***********************************									
+	*			About Me 				
+	***********************************/
+  #about-page .content-nav .options {
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+  /***********************************									
+	*			Services 				
+	***********************************/
+  #services-page {
+    padding-top: 0;
+  }
+  #services-page .container.content-nav {
+    padding-top: 0;
+  }
+  #services-page .container.content-nav .options {
+    padding: 10px 0;
+  }
+  #services-page .container.content-nav .options .option {
+    float: none;
+    width: 100%;
+    padding: 10px 0;
+  }
+  /***********************************									
+	*			Login / Register 				
+	***********************************/
+  #login-page form,
+  #register-page form,
+  #add-contact form,
+  #update-contact form {
+    width: 90%;
+    min-width: 90%;
+  }
+  /****************************************************************************************************
+	*																									*
+	*												FOOTER MAIN									
+	*																									*
+	****************************************************************************************************/
+  footer .copyright p {
+    font-size: 2.2vw;
+  }
+}
+@media screen and (max-width: 570px) {
+  /***********************************									
+	*			Interior 				
+	***********************************/
+  .interior-page .gallery .projects .project {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  /****************************************************************************************************
+	*																									*
+	*												HOME PAGE 										
+	*																									*
+	****************************************************************************************************/
+  #home-page {
+    /***********************************									
+		*			Top Banner 				
+		***********************************/
+  }
+  #home-page .top-banner .rotator .slides .slide .container {
+    max-width: 80%;
+  }
+  #home-page .top-banner .rotator .slides .slide .container .heading h2 {
+    font-size: 32px;
+  }
+  #home-page .top-banner .rotator .slides .slide .container .text p {
+    font-size: 16px;
+  }
+  #home-page .top-banner .rotator .slides .slide .container .button a {
+    font-size: 16px;
+  }
+  #home-page .top-banner .rotator .slides .rotator-controls {
+    bottom: 30px;
+  }
+  #home-page .top-banner .rotator .slides .rotator-controls .control {
+    width: 22px;
+    height: 22px;
+    margin: 8px;
+  }
+  #home-page .top-banner .rotator .slides .rotator-arrows {
+    display: none;
+  }
+  /****************************************************************************************************
+	*																									*
+	*												FOOTER MAIN					
+	*																									*
+	****************************************************************************************************/
+  footer .copyright p {
+    font-size: 11px;
+  }
+}
+@media screen and (max-width: 450px) {
+  /****************************************************************************************************
+	*																									*
+	*											INTERIOR PAGES 										
+	*																									*
+	****************************************************************************************************/
+  /***********************************									
+	*			About Me 				
+	***********************************/
+  #about-page .content-nav {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 20px;
+  }
+  #about-page .content-nav .options .option span {
+    position: absolute;
+    opacity: 0;
+    left: 50px;
+    width: 100%;
+  }
+  #about-page .content-nav .options .option:hover {
+    width: 50px;
+  }
+  #about-page .content-nav .options .option:hover span {
+    opacity: 0;
+  }
+  #about-page .content-nav .options .clear-float {
+    display: block;
+  }
+  /***********************************									
+	*			Login / Register 				
+	***********************************/
+  #login-page form,
+  #register-page form,
+  #add-contact form,
+  #update-contact form {
+    padding: 10px 30px;
+  }
+}

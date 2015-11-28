@@ -1,0 +1,59 @@
+<!--
+/**
+* Author : Daniel Masci - 200299037
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Rich Freeman / Tom Tsiliopolous
+* Purpose : Assignment 1 - Express Portfolio
+* Website Name : MasciApps
+* 
+* The Following page is part of the backend of my website. 
+* It provides authenticated users with a the ability to 
+* update a Contact's information.
+*/
+-->
+
+
+<%- include ../partials/header.ejs %>
+
+<div class="interior-header" style="background-image: url(../images/dashboard.jpg)">
+	<div class="container">
+		<h1>Update Contact</h1>
+	</div>
+</div><!-- interior-header -->
+
+<div class="interior-page" id="update-contact">
+
+	<div class="container">
+		
+	<!-- Display flash messages  -->
+		<form method="post">		
+			<div class="exit"><a href="/contacts"><i class="fa fa-times"></i></a></div><!-- exit -->
+			<h2>Update Contact</h2>
+			<div class="input">
+				<input id="firstName" name="firstName" type="text" placeholder="First Name: " autofocus required
+				value="<%= contact.firstName %>">
+			</div>
+			<div class="input">
+				<input id="lastName" name="lastName" type="text" placeholder="Last Name: " required
+				value="<%= contact.lastName %>">
+			</div>
+			<div class="input">
+				<input id="email" name="email" type="text" placeholder="Email Address: " required
+				value="<%= contact.email %>">
+			</div>
+			<div class="input">
+				<input id="number" name="number" type="text" placeholder="Phone Number: " required
+				value="<%= contact.number %>">
+			</div>
+			<div class="buttons">
+				<button class="update" type="submit">Update</button>
+				<a class="delete" href="/contacts/delete/<%= contact._id %>" title="Delete Contact" onclick="return confirm('Are you sure you want to delete <%= contact.firstName %>?');">Delete</a>
+			</div><!-- submit -->
+		</form>
+
+	</div><!-- container -->
+
+</div><!-- #login-page -->
+
+<%- include ../partials/footer.ejs %>

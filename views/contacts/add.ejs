@@ -1,0 +1,54 @@
+<!--
+/**
+* Author : Daniel Masci - 200299037
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Rich Freeman / Tom Tsiliopolous
+* Purpose : Assignment 1 - Express Portfolio
+* Website Name : MasciApps
+* 
+* The Following page is part of the backend of my website. 
+* It provides authenticated users with a the ability to add
+* a Contact's information to the Database.
+*/
+-->
+
+
+<%- include ../partials/header.ejs %>
+
+<div class="interior-header" style="background-image: url(../images/dashboard.jpg)">
+	<div class="container">
+		<h1>Add Contact</h1>
+	</div>
+</div><!-- interior-header -->
+
+<div class="interior-page" id="add-contact">
+
+	<div class="container">
+		
+	<!-- Display flash messages  -->
+		<form method="post">		
+			<div class="exit"><a href="/contacts"><i class="fa fa-times"></i></a></div><!-- exit -->
+			<h2>Add Contact</h2>
+			<div class="input">
+				<input id="firstName" name="firstName" type="text" placeholder="First Name: " autofocus required>
+			</div>
+			<div class="input">
+				<input id="lastName" name="lastName" type="text" placeholder="Last Name: " required>
+			</div>
+			<div class="input">
+				<input id="email" name="email" type="text" placeholder="Email Address: " required>
+			</div>
+			<div class="input">
+				<input id="number" name="number" type="text" placeholder="Phone Number: " required>
+			</div>
+			<div class="submit">
+				<button type="submit">Add</button>
+			</div><!-- submit -->
+		</form>
+
+	</div><!-- container -->
+
+</div><!-- #login-page -->
+
+<%- include ../partials/footer.ejs %>

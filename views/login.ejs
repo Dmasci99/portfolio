@@ -1,0 +1,46 @@
+<!-- 
+/**
+* Author : Daniel Masci - 200299037
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Rich Freeman / Tom Tsiliopolous
+* Purpose : Assignment 2 - Authentication
+* Website Name : MasciApps
+* 
+* The Following page is the View for the "Login" page.
+*/ 
+-->
+
+
+<%- include ./partials/header.ejs %>
+
+<div class="interior-header" style="background-image: url(../images/slide4.jpg)">
+	<div class="container">
+		<h1>Login</h1>
+	</div>
+</div><!-- interior-header -->
+
+<div class="interior-page" id="login-page">
+
+	<div class="container">
+		
+	<!-- Display flash messages  -->
+		<form method="post">		
+			<% if (messages.length > 0) { %><div class="message"><span><%= messages %></span></div><% } %>
+			<h2>Login</h2>
+			<div class="input">
+				<input id="username" name="username" type="text" placeholder="Username: " autofocus required>
+			</div>
+			<div class="input">
+				<input id="password" name="password" type="password" placeholder="Password: " required>
+			</div>
+			<div class="submit">
+				<button type="submit">Login</button>
+			</div><!-- submit -->
+		</form>
+
+	</div><!-- container -->
+
+</div><!-- #login-page -->
+
+<%- include ./partials/footer.ejs %>

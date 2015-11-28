@@ -1,0 +1,73 @@
+<!--
+/**
+* Author : Daniel Masci - 200299037
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Rich Freeman / Tom Tsiliopolous
+* Purpose : Assignment 1 - Express Portfolio
+* Website Name : MasciApps
+* 
+* The Following page is the Dashboard of the backend of my website. 
+* It provides authenticated users with a list of all contacts and 
+* allows for editing/deleting/adding of contacts.
+*/
+-->
+
+
+<%- include ../partials/header.ejs %>
+
+<div class="interior-header backend-header" style="background-image: url(../../images/dashboard.jpg">
+	<div class="container">
+		<h1>Business Contacts</h1>
+	</div><!-- container -->
+</div><!-- interior-header -->
+
+<div class="interior-page backend-page contacts-backend" id="contacts-dashboard">
+
+	<div class="container">
+
+		<div class="contact-table">
+			<a class="add-contact" href="/contacts/add"><i class="fa fa-plus-circle"></i></a>
+			<table>
+				<thead>
+					<tr>
+						<th class="text name">Name</th>
+						<th class="text email">Email</th>
+						<th class="text number">Number</th>
+						<th class="icon update"></th>
+						<th class="icon delete"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for(var x = 0; x < contacts.length; x++) { %>
+					<tr>
+						<td class="name">
+							<%= contacts[x].firstName + ' ' + contacts[x].lastName %>
+						</td>
+						<td class="email">
+							<%= contacts[x].email %>							
+						</td>
+						<td class="number">
+							<%= contacts[x].number %>
+						</td>
+						<td class="update">
+							<a href="/contacts/<%= contacts[x]._id %>" title="Update Contact"><i class="fa fa-pencil-square-o"></i></a>
+						</td>
+						<td class="delete">
+							<a href="/contacts/delete/<%= contacts[x]._id %>" title="Delete Contact" onclick="return confirm('Are you sure you want to delete <%= contacts[x].firstName %>?');"><i class="fa fa-trash-o"></i></a>
+						</td>
+					</tr>
+					<% } %>
+				</tbody>
+			</table>
+		</div><!-- contact-table-->
+
+		<div class="contact-table-mobile">
+			
+		</div><!-- contact-table-mobile -->
+
+	</div><!-- container -->
+
+</div><!-- #contacts-dashboard -->
+
+<%- include ../partials/footer.ejs %>

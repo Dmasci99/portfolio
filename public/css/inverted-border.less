@@ -1,0 +1,139 @@
+/***********************************									
+*			Services 				
+***********************************/
+#services-page {
+	.container.nav {
+		.options {
+			position: relative;
+			.round(6px);
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+			height: 80px;
+			width: 546px;
+			background: @lightGrey;
+			margin: 0 auto;
+			.option {			
+				float: left;
+				position: relative;	
+				cursor: pointer;
+				text-align: center;
+				padding: 30px 40px;
+				&:hover {
+					background: @darkBlue;
+				}
+				&::before {
+					opacity: 0;
+					content: "";
+					position: absolute;
+					bottom: -1px;
+					right: -10px;
+					width: 10px;
+					height: 10px;
+					background: @lightGrey;
+				}
+				&::after {
+					opacity: 0;
+					content: "";
+					position: absolute;
+					bottom: -11px;
+					right: -20px;
+					.translateY;
+					width: 20px;
+					height: 20px;
+					background: @offWhite;
+					.round();
+				}
+				span {
+					display: block;
+					&::before {
+						opacity: 0;
+						content: "";
+						position: absolute;
+						bottom: -1px;
+						left: -10px;
+						width: 10px;
+						height: 10px;
+						background: @lightGrey;
+					}
+					&::after {
+						opacity: 0;
+						content: "";
+						position: absolute;
+						bottom: -11px;
+						left: -20px;
+						.translateY;
+						width: 20px;
+						height: 20px;
+						background: @offWhite;
+						.round();
+					}		
+				}//span
+				&:last-child {
+					&::after {
+						right: -21px;
+					}
+					span {
+						&::before {
+							left: -21px;
+						}
+					}
+				}		
+				&.active {
+					&::before, &::after {
+						opacity: 1;
+					}
+				}
+			}//.option
+			.inverted-corner {	
+				position: absolute;
+				width: 546px;	
+				bottom: 0;
+				&::before {
+					content: "";
+					position: absolute;
+					bottom: -2px;
+					width: 10px;
+					height: 10px;
+					background: @lightGrey;
+				}
+				&::after {
+					content: "";
+					position: absolute;
+					bottom: -10px;
+					.translateY;
+					width: 20px;
+					height: 20px;
+					background: @offWhite;
+					.round();
+				}
+				&.left {
+					left: 0;
+					&::before {
+						left: -10px;
+					}
+					&::after {
+						left: -20px;
+					}
+				}
+				&.right {
+					right: 0;
+					&::before { 
+						right: -10px;
+					}
+					&::after {
+						right: -20px;
+					}
+				}
+			}//.inverted-corner
+		}//.options
+	}//.container
+	.content {
+		background: @lightGrey;
+		padding: 60px 0;
+		.container {
+			
+		}//.container
+	}//.content
+	
+
+}//#services-page

@@ -1,0 +1,72 @@
+<!--
+/**
+* Author : Daniel Masci - 200299037
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Rich Freeman / Tom Tsiliopolous
+* Purpose : Assignment 1 - Express Portfolio
+* Website Name : MasciApps
+* 
+* The Following page is the View for the "Projects" page. In it I display the previous
+* work that I have done - web specific.
+*/
+-->
+
+
+<%- include ./partials/header.ejs %>
+
+<div class="interior-header" style="background-image: url(../images/slide2.jpg)">
+	<div class="container">
+		<h1>Projects</h1>
+	</div>
+</div><!-- interior-header -->
+
+<div class="interior-page" id="projects-page">
+
+	<div class="container">
+		<div class="gallery content">
+			<h2>Static Websites</h2>
+			<ul class="projects">
+				<li class="project">					
+					<div class="image image-scale">
+						<img src="../images/dekoning.jpg" alt="">
+						<div class="text">
+							<p>Dekoning</p>
+							<div class="button"><a href="http://dekoningemc.ca/">Take Me Here</a></div>
+						</div>
+					</div><!-- image -->
+				</li>
+				<li class="project">					
+					<div class="image image-scale">
+						<img src="../images/turnkey.jpg" alt="">
+						<div class="text">
+							<p>Turnkey Bioscience</p>
+							<div class="button"><a href="http://www.turnkeybioscience.com/">Take Me Here</a></div>
+						</div>
+					</div><!-- image -->
+				</li>
+				<li class="project">					
+					<div class="image image-scale">
+						<img src="../images/liveinluxury.jpg" alt="">
+						<div class="text">
+							<p>LiveInLuxury</p>
+							<div class="button"><a href="http://www.liveinluxury.ca/">Take Me Here</a></div>
+						</div>
+					</div><!-- image -->
+				</li>
+				<li class="project">					
+					<div class="image image-scale">
+						<img src="../images/dogdayscamp.jpg" alt="">
+						<div class="text">
+							<p>DogDaysCamp</p>
+							<div class="button"><a href="http://dogdayscamp.com/">Take Me Here</a></div>
+						</div>
+					</div><!-- image -->
+				</li>
+			</ul><!-- projects -->
+		</div><!-- gallery -->
+	</div><!-- container -->
+
+</div><!-- #projects-page -->
+
+<%- include ./partials/footer.ejs %>

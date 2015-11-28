@@ -1,0 +1,468 @@
+/**
+* Author : Daniel Masci - 200299037
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Rich Freeman / Tom Tsiliopolous
+* Purpose : Assignment 1 - Express Portfolio
+* Website Name : MasciApps
+*/
+
+/**
+* The follwing stylesheet is imported into style.less. This is used specifically for responsive
+* design throughout the entirety of the website.
+*/
+
+@media screen and (max-width: 1160px) {
+	/****************************************************************************************************
+	*																									*
+	*											INTERIOR PAGES 										
+	*																									*
+	****************************************************************************************************/
+	/***********************************									
+	* 		  Projects Gallery				
+	***********************************/
+	.interior-page {
+		.gallery {
+			.projects {
+				.project {
+					.text {
+						opacity: 1;
+						visibility: visible;
+						p {
+							top: 0;
+						}
+						.button {
+							top: 10px;
+						}		
+					}//.text		
+				}//.project
+			}//.projects
+		}//gallery
+	}//.interior-page
+	/***********************************									
+	*			About Me 				
+	***********************************/
+	#about-page {
+		.content-nav {
+			.container;
+			.options {
+				position: relative;
+				top: 0;
+				.translateY(0);
+				left: 0;
+				.option {
+					float: left;
+					position: relative;
+					text-align: left;
+					width: 50px;
+					left: 0;
+					padding: 15px 0px;
+					margin: 0 3px;
+					span {
+						position: absolute;
+						opacity: 0;
+						left: 50px;
+						width: 100%;
+					}
+					.fa {
+						position: relative;	
+						left: 40px;
+					}
+					&:hover {
+						left: 0;
+						width: 200px;
+						span {
+							opacity: 1;
+						}
+					}
+					&.active {				
+						width: 50px;
+						left: 0;
+					}
+				}//.option
+				.clear-float {
+					display: block;
+				}
+			}//.options	
+		}//.content-nav		
+	}//#about-page
+}//1160px
+
+@media screen and (max-width: 1025px) {
+
+
+}//1025px
+
+@media screen and (max-width: 980px) {
+	/****************************************************************************************************
+	*																									*
+	*												HEADER MAIN									
+	*																									*
+	****************************************************************************************************/
+	header {
+		#header-nav {	
+			.menu {
+				display: none;
+			}//menu
+		}//nav#header-nav
+		#account-nav {
+			left: 40px;
+			right: auto;
+		}
+		#moby-button {	
+			display: block;			
+		}//#moby-button	
+	}//header
+	/****************************************************************************************************
+	*																									*
+	*											INTERIOR PAGES 										
+	*																									*
+	****************************************************************************************************/
+	/***********************************									
+	*			Services 				
+	***********************************/
+	#services-page {
+		.container.content-nav {		
+			padding: 0;
+			.options {
+				.round(0);
+				.option {		
+					float: left;
+					position: relative;	
+					cursor: pointer;
+					text-align: center;
+					padding: 30px 40px;
+					.trans(all,0.3s);
+					span {
+						color: @silver;
+						position: relative;
+						text-transform: uppercase;
+						.trans(all,0.3s);
+						&::after {
+							opacity: 0;
+							content: "";
+							position: absolute;
+							top: 140%;
+							left: 50%;
+							.translateX;
+							width: 0;
+							height: 2px;
+							background: darken(@silver, 15%);
+							.trans(all,0.3s);
+						}
+					}//span
+					&:hover,
+					&.active {
+						span {
+							color: darken(@silver, 15%);
+							&::after {
+								opacity: 1;
+								width: 125%;
+							}
+						}
+					}//span:hover
+				}//.option
+			}//.options
+		}//.container
+	}//#services-page
+
+}//980px
+
+@media screen and (max-width: 800px) {
+	/***********************************									
+	*			Project Gallery 				
+	***********************************/
+	.interior-page {
+		.gallery {
+			.projects {
+				.project {
+					width: 48%;
+				}//li.project
+			}//ul.projects
+		}//.gallery
+	}//.interior-page
+
+}//850px
+
+@media screen and (max-width: 650px) {
+	body {
+		height: Calc(~"100% - 174px");
+	}
+	/****************************************************************************************************
+	*																									*
+	*												HOME PAGE 										
+	*																									*
+	****************************************************************************************************/
+	#home-page {	
+		/***********************************									
+		*			Top Banner 				
+		***********************************/
+		.top-banner {
+			.rotator {
+				.slides {
+					.slide {
+						.container {
+							max-width: 80%;
+							.heading {
+								h2 {
+									font-size: 5.8vw;
+								}
+							}//.heading
+							.text {
+								p {
+									font-size: 2.9vw;
+								}
+							}//.text
+							.button {
+								a {
+									font-size: 2.9vw;
+								}
+							}//.button
+						}//.container
+					}//.slide
+					.rotator-controls {
+						bottom: 25px;
+						.control {
+							width: 20px;
+							height: 20px;
+							margin: 6px;
+						}//.control
+					}//.rotator-controls
+					.rotator-arrows {
+						display: none;				
+					}//.rotator-arrows
+				}//.slides
+			}//.rotator
+		}//.top-banner
+	}//#home-page	
+	/****************************************************************************************************
+	*																									*
+	*											INTERIOR PAGES 										
+	*																									*
+	****************************************************************************************************/
+	/***********************************									
+	*			Interior Header				
+	***********************************/
+	.interior-header {
+		.container {
+			h1 {
+				text-align: center;
+				left: 0;
+				&::after {
+					position: relative;
+					display: block;
+					top: 5px;
+					left: 50%;
+					.translateX;
+					width: 70%;
+				}
+			}//h1
+		}//.container
+	}//.interior-header
+	/***********************************									
+	*			Interior 				
+	***********************************/
+	.interior-page {
+		.content {
+			h2 {
+				padding-top: 40px;
+				text-align: center;
+			}
+		}//.content
+		.option-content {
+			text-align: center;	
+		}//.option-content
+		.trigger {
+			text-align: center;
+			strong {
+				display: block;		
+				width: calc(~"100% - 40px");
+				position: relative;
+				left: 20px;
+			}
+		}
+		.trigger-content {
+			text-align: center;
+		}
+	}//.interior-page
+	/***********************************									
+	*			About Me 				
+	***********************************/
+	#about-page {
+		.content-nav {
+			.options {
+				display: inline-block;
+				position: relative;
+				left: 50%;
+				.translateX;
+				.option {
+
+				}
+			}//.options
+		}//.content-nav
+	}//#about-page
+	/***********************************									
+	*			Services 				
+	***********************************/
+	#services-page {
+		padding-top: 0;		
+		.container.content-nav {
+			padding-top: 0;		
+			.options {
+				padding: 10px 0;
+				.option {		
+					float: none;
+					width: 100%;
+					padding: 10px 0;					
+				}//.option
+			}//.options
+		}//.container
+	}//#services-page
+	/***********************************									
+	*			Login / Register 				
+	***********************************/
+	#login-page,
+	#register-page,
+	#add-contact,
+	#update-contact {
+		form {
+			width: 90%;
+			min-width: 90%;
+		}
+	}//#login / register
+	/****************************************************************************************************
+	*																									*
+	*												FOOTER MAIN									
+	*																									*
+	****************************************************************************************************/
+	footer {
+		.copyright {
+			p {
+				font-size: 2.2vw;
+			}
+		}//.copyright
+	}//footer
+}//650px
+
+@media screen and (max-width: 570px) {
+	/***********************************									
+	*			Interior 				
+	***********************************/
+	.interior-page {
+		.gallery {
+			.projects {
+				.project {
+					width: 100%;
+				}//.project
+			}//.projects
+		}//.gallery
+	}//.interior-page
+}//570px
+@media screen and (max-width: 500px) {
+	/****************************************************************************************************
+	*																									*
+	*												HOME PAGE 										
+	*																									*
+	****************************************************************************************************/
+	#home-page {	
+		/***********************************									
+		*			Top Banner 				
+		***********************************/
+		.top-banner {
+			.rotator {
+				.slides {
+					.slide {
+						.container {
+							max-width: 80%;
+							.heading {
+								h2 {
+									font-size: 32px;
+								}
+							}//.heading
+							.text {
+								p {
+									font-size: 16px;
+								}
+							}//.text
+							.button {
+								a {
+									font-size: 16px;
+								}
+							}//.button
+						}//.container
+					}//.slide
+					.rotator-controls {
+						bottom: 30px;
+						.control {
+							width: 22px;
+							height: 22px;
+							margin: 8px;
+						}//.control
+					}//.rotator-controls
+					.rotator-arrows {
+						display: none;				
+					}//.rotator-arrows
+				}//.slides
+			}//.rotator
+		}//.top-banner
+	}//#home-page
+	/****************************************************************************************************
+	*																									*
+	*												FOOTER MAIN					
+	*																									*
+	****************************************************************************************************/
+	footer {
+		.copyright {
+			p {
+				font-size: 11px;
+			}
+		}//.copyright
+	}//footer
+}//500px
+
+@media screen and (max-width: 450px) {
+	/****************************************************************************************************
+	*																									*
+	*											INTERIOR PAGES 										
+	*																									*
+	****************************************************************************************************/
+	/***********************************									
+	*			About Me 				
+	***********************************/
+	#about-page {
+		.content-nav {
+			.container;
+			.options {
+				.option {					
+					span {
+						position: absolute;
+						opacity: 0;
+						left: 50px;
+						width: 100%;
+					}
+					&:hover {
+						width: 50px;
+						span {
+							opacity: 0
+						}
+					}
+				}//.option
+				.clear-float {
+					display: block;
+				}
+			}//.options	
+		}//.content-nav		
+	}//#about-page
+	/***********************************									
+	*			Login / Register 				
+	***********************************/
+	#login-page,
+	#register-page,	
+	#add-contact,
+	#update-contact {
+		form {
+			padding: 10px 30px;
+		}
+	}//#login / register
+
+}//450px
