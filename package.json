@@ -1,9 +1,9 @@
 {
-  "name": "comp2068-ass1",
-  "version": "0.0.0",
+  "name": "portfolio",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./server.js"
+    "start": "node ./server/server.js"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",

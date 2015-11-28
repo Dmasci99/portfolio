@@ -1,0 +1,87 @@
+<!--
+/**
+* Author : Daniel Masci - 200299037
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Rich Freeman / Tom Tsiliopolous
+* Purpose : Assignment 1 - Express Portfolio
+* Website Name : MasciApps
+* 
+* The Following page is a partial view - the Header that is called into
+* every other view. It includes very important HTML requirements, CSS files,
+* and a consistent menu across the whole site.
+*/
+-->
+
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+    	<meta charset="UTF-8">
+        <title><%= title; %></title>
+      			
+
+        <!-- Site Favicons -->
+
+		
+		<!-- Css/JS/Jquery -->
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+		<link type="text/css" rel="stylesheet" href="../lib/font-awesome/css/font-awesome.min.css">
+        <link type="text/css" rel="stylesheet" href="../css/style.css">
+
+		<!--[if gte IE 9]>
+
+		<![endif]-->
+ 	</head>
+
+    <body>
+		<!-- <div class="sticky-footer"> -->
+
+		    <header class="header">
+				<div class="container">						
+
+					<!-- Mobile Menu -->
+					<span id="moby-button"><i class="fa fa-bars"></i></span>
+					<div class="clear-float"></div><!-- clear-float -->
+
+					<!-- Main Menu -->
+					<nav id="header-nav">
+						<ul class="menu">
+							<li><a <% if (page && page=="about") { %>class="active"<% } %> href="/about">About</a></li>
+							<li><a <% if (page && page=="projects") { %>class="active"<% } %> href="/projects">Projects</a>
+								<ul class="sub-menu">
+									<li><a href="http://dekoningemc.ca/">Dekoning Mechanical</a></li>
+									<li><a href="http://www.turnkeybioscience.com/">Turnkey Bioscience</a></li>
+									<li><a href="http://www.liveinluxury.ca/">LiveInLuxury</a></li>
+									<li><a href="http://dogdayscamp.com/">DogDaysCamp</a></li>
+								</ul>
+							</li>						
+							<li><a <% if (page && page=="services") { %>class="active"<% } %> href="/services">Services</a></li>	
+							<li><a <% if (page && page=="contact") { %>class="active"<% } %> href="/contact">Contact</a></li>	
+							<div class="clear-float"></div><!--clear-float-->				
+						</ul>
+					</nav><!--.header-nav-->
+
+					<!-- Account Menu -->
+					<nav id="account-nav">
+					<% if (!name) { %>
+						<ul class="menu">
+							<li><a class="login<% if (page && page == "login") { %> active<% } %>" href="/login">Login</a></li>
+							<li><a class="register<% if (page && page == "register") { %> active<% } %>" href="/register">Register</a></li>
+						</ul>
+					<% } else { %>
+						<ul class="menu loggedin">
+							<p>Welcome, <%= name %>!</p>
+							<li><a class="dashboard<% if (page && page== "dashboard") { %> active<% } %>" href="/contacts">Dashboard</a></li>
+							<li><a class="logout" href="/logout">Logout</a></li>
+							<div class="clear-float"></div>
+						</ul>
+					<% } %>
+					</nav><!-- account-nav -->
+
+					<div class="clear-float"></div><!--clear-float-->
+
+				</div><!--container-->
+		    </header>
+				    
