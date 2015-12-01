@@ -1,3 +1,4 @@
+<!-- 
 /**
 * Author : Daniel Masci - 200299037
 * Class : Advanced Web Programming
@@ -8,11 +9,9 @@
 * 
 * The Following file is our main routing file use to generate the majority
 * of our front-end pages (HOME / ABOUT / SERVICES / PROJECTS / CONTACT etc).
-*
 * This is also used to process our LOGIN / REGISTER forms.
-*
-* This is also used to process our TODOLIST.
 */ 
+-->
 
 var express = require('express');
 var router = express.Router();
@@ -20,10 +19,6 @@ var passport = require('passport');
 
 var User = require('../models/user');
 
-/* Public Webpages */
-////////////////////////////////////////////////////
-//				Render Page VIEWS
-////////////////////////////////////////////////////
 /* GET home page. */
 router.get('/', function (req, res, next) {
 	res.render('index', { 
@@ -102,18 +97,6 @@ router.get('/register', function(req, res, next) {
 	}
 });
 
-
-/* Todo List and Functionality */
-////////////////////////////////////////////////////
-//				Render Page VIEWS
-////////////////////////////////////////////////////
-router.get('/todolist', function(req, res, next) {
-	res.render('todolist', {
-		title: 'Todos | MasciApps',
-		page: 'todos',
-		name: req.user ? req.user.username : ''
-	});
-});
 
 ////////////////////////////////////////////////////
 //				Process Form POSTS

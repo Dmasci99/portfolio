@@ -17,11 +17,19 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 
-var auth = require('../config/auth.js');
-var Contact = require('../models/contact.js');
+var Contact = require('../models/contact');
+
+//Check if user is authenticated
+function requireAuth(req, res, next) {
+	//check if user is logged in
+	if (!req.isAuthenticated()){
+		res.redirect('/login');
+	}
+	next();
+}
 
 /* GET contacts "Dashboard" page. */
-router.get('/', auth.requireAuth, function (req, res, next) {
+router.get('/', requireAuth, function (req, res, next) {
 	Contact.find(function (err, contacts) {
 		if (err) {
 			console.log(err);
@@ -38,7 +46,7 @@ router.get('/', auth.requireAuth, function (req, res, next) {
 	}).sort( { firstName : 1, lastName: 1, email: 1 } ); //Sort the listing by firstName, then lastName, then email in ASCENDING order
 });
 /* GET contacts "Add Contact" page. */
-router.get('/add', auth.requireAuth, function (req, res, next) {
+router.get('/add', requireAuth, function (req, res, next) {
 	Contact.find(function (err, contacts) {
 		if (err) {
 			console.log(err);
@@ -54,11 +62,11 @@ router.get('/add', auth.requireAuth, function (req, res, next) {
 	});
 });
 /* Redirect from /contacts/update to /contacts. */
-router.get('/update', auth.requireAuth, function (req, res, next) {
+router.get('/update', requireAuth, function (req, res, next) {
 	res.redirect('/contacts');
 });
 /* GET contacts "Update Contact" page. */
-router.get('/:id', auth.requireAuth, function (req, res, next) {
+router.get('/:id', requireAuth, function (req, res, next) {
 
 	//grab Contact ID
 	var id = req.params.id;
