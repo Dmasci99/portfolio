@@ -18,7 +18,7 @@ var TodoSchema = new Schema({
 	},
 	completed: {
 		type: Boolean,
-		default: true
+		default: false
 	},
 	updated: {
 		type: Date, 
