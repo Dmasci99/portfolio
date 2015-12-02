@@ -76,6 +76,9 @@ if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
+      title: '404 | MasciApps',
+      page: '404',
+      name: req.user ? req.body.username : '',
       message: err.message,
       error: err
     });
@@ -87,6 +90,9 @@ if (app.get('env') === 'development') {
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
+    title: '404 | MasciApps',
+    page: '404',
+    name: req.user ? req.body.username : '',
     message: err.message,
     error: {}
   });
