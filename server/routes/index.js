@@ -96,7 +96,8 @@ router.get('/register', function(req, res, next) {
 });
 
 /* Show Todo List Page */
-router.get('/todolist', function (req, res, next) {
+var auth = require('../config/auth.js');
+router.get('/todolist', auth.requireAuth, function (req, res, next) {
 	res.render('todolist', {
 		title: 'Todos',
 		page: 'todos',

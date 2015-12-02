@@ -1,62 +1,61 @@
-var express = require('express');
-var passport = require('passport');
-var router = express.Router();
+//modules
+var express = require('express'),
+    passport = require('passport'),
+    router = express.Router();
 
-//var mongoose = require('mongoose');
-var Todo = require('../models/todo.js');
-
-/* Utility function to check if user is authenticatd */
-function requireAuth(req, res, next){
-
-  // check if the user is logged in
-  if(!req.isAuthenticated()){
-    return res.redirect('/login');
-  }
-  next();
-}
+//files
+var auth = require('../config/auth.js'),
+    Todo = require('../models/todo.js');
 
 
-/* CREATE TODOS */
-router.post('/', requireAuth, function(req, res, next){
-   Todo.create(req.body, function(err, post){
-      if(err){
-        return next(err);}
-
-      res.json(post);
-   });
+/* Todo VIEW - Dashboard */
+router.get('/', auth.requireAuth, function(req, res, next) {
+    Todo.find(function(err, todos){
+        if(err) {
+            return next(err);
+        }
+        res.json(todos);
+    });
 });
 
-/* READ TODOS */
-router.get('/', requireAuth, function(req, res, next) {
-  Todo.find(function(err,todos){
-     if(err){return next(err);}
-      res.json(todos);
-  });
+/* Todo VIEW - Single */
+router.get('/:id', auth.requireAuth, function(req, res, next) {
+    Todo.findById(req.params.id, function(err, post) {
+        if(err) {
+            return next(err);
+        }
+        res.json(post);
+    });
 });
 
-/* READ /todos/id */
-router.get('/:id', requireAuth, function(req, res, next) {
-   Todo.findById(req.params.id, function(err,post){
-      if(err) {
-        return next(err);}
-       res.json(post);
-   });
+/* Todo POST - CREATE */
+router.post('/', auth.requireAuth, function(req, res, next) {
+    Todo.create(req.body, function(err, post){
+        if(err) {
+            return next(err);
+        }
+        res.json(post);
+    });
 });
 
-/* UPDATE /todos/:id */
-router.put('/:id', requireAuth, function(req,res, next){
-   Todo.findByIdAndUpdate(req.params.id, req.body, function(err, post){
-      if(err) {return next(err);}
-       res.json(post);
-   }); 
+/* Todo PUT - UPDATE */
+router.put('/:id', auth.requireAuth, function(req, res, next) {
+    Todo.findByIdAndUpdate(req.params.id, req.body, function(err, post) {
+        if(err) {
+            return next(err);
+        }
+        res.json(post);
+    });        
 });
 
-/* DELETE /todos/:id */
-router.delete('/:id', requireAuth, function(req,res,next){
-   Todo.findByIdAndRemove(req.params.id, req.body, function(err,post){
-      if(err) {return next(err);}
-       res.json(post);
-   });
+/* Todo DELETE - DELETE */
+router.delete('/:id', auth.requireAuth, function(req, res, next) {
+    Todo.findByIdAndRemove(req.params.id, req.body, function(err, post) {
+        if(err){
+            return next(err);
+        }
+        res.json(post);
+    });
 });
 
 

@@ -575,7 +575,7 @@ header #account-nav .menu.loggedin p {
   padding: 5px;
   margin: 0;
 }
-header #account-nav .menu li a {
+header #account-nav .menu > li > a {
   border: 2px solid #3f507f;
   font-size: 13px;
   font-variant: small-caps;
@@ -593,20 +593,20 @@ header #account-nav .menu li a {
   -o-transition: all 0.3s;
   transition: all 0.3s;
 }
-header #account-nav .menu li a.register {
+header #account-nav .menu > li > a.register {
   color: #d4cde5;
   background: rgba(15, 31, 77, 0.8);
   border-top-right-radius: 0;
   border-top-left-radius: 0;
   border-top: 0;
 }
-header #account-nav .menu li a.login {
+header #account-nav .menu > li > a.login {
   color: #0f1f4d;
   border-bottom: 0;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-header #account-nav .menu li a.logout {
+header #account-nav .menu > li > a.logout {
   width: 50%;
   float: left;
   color: #d4cde5;
@@ -615,7 +615,7 @@ header #account-nav .menu li a.logout {
   border-bottom-left-radius: 0;
   border-left: 0;
 }
-header #account-nav .menu li a.dashboard {
+header #account-nav .menu > li > a.dashboard {
   width: 50%;
   float: left;
   color: #0f1f4d;
@@ -623,15 +623,65 @@ header #account-nav .menu li a.dashboard {
   border-bottom-right-radius: 0;
   border-right: 0;
 }
-header #account-nav .menu li a:hover,
-header #account-nav .menu li a.active {
+header #account-nav .menu > li > a:hover,
+header #account-nav .menu > li > a.active {
   background: #c6bcdc;
 }
-header #account-nav .menu li a:hover.register,
-header #account-nav .menu li a.active.register,
-header #account-nav .menu li a:hover.logout,
-header #account-nav .menu li a.active.logout {
+header #account-nav .menu > li > a:hover.register,
+header #account-nav .menu > li > a.active.register,
+header #account-nav .menu > li > a:hover.logout,
+header #account-nav .menu > li > a.active.logout {
   background: #0f1f4d;
+}
+header #account-nav .menu > li .sub-menu {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: 10px 0;
+  width: 51%;
+  background: rgba(212, 205, 229, 0.8);
+  border: 2px solid #3f507f;
+  border-top: none;
+}
+header #account-nav .menu > li .sub-menu::before {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 0;
+  border-top: 5px solid #3f507f;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+header #account-nav .menu > li .sub-menu li a {
+  color: #000000;
+  display: block;
+  padding: 10px;
+  font-size: 13px;
+  font-variant: small-caps;
+  font-weight: 400;
+}
+header #account-nav .menu > li .sub-menu li a:hover {
+  font-weight: 700;
+}
+header #account-nav .menu > li:hover a.dashboard {
+  border-bottom-left-radius: 0;
+  background: #c6bcdc;
+}
+header #account-nav .menu > li:hover .sub-menu {
+  opacity: 1;
+  visibility: visible;
+}
+header #account-nav .menu > li:hover .sub-menu::before {
+  opacity: 1;
 }
 header #moby-button {
   display: none;
