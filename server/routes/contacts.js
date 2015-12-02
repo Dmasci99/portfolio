@@ -1,4 +1,3 @@
-<!-- 
 /**
 * Author : Daniel Masci - 200299037
 * Class : Advanced Web Programming
@@ -11,7 +10,6 @@
 * subpages. This file includes user authentication and is therefore
 * restricted. It handles ADD / UPDATE / DELETE for our Business Contacts.
 */ 
--->
 
 var express = require('express');
 var passport = require('passport');

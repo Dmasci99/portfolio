@@ -1,4 +1,3 @@
-<!-- 
 /**
 * Author : Daniel Masci - 200299037
 * Class : Advanced Web Programming
@@ -10,8 +9,7 @@
 * The Following file is our main routing file use to generate the majority
 * of our front-end pages (HOME / ABOUT / SERVICES / PROJECTS / CONTACT etc).
 * This is also used to process our LOGIN / REGISTER forms.
-*/ 
--->
+*/
 
 var express = require('express');
 var router = express.Router();
@@ -97,6 +95,16 @@ router.get('/register', function(req, res, next) {
 	}
 });
 
+/* Show Todo List Page */
+router.get('/todolist', function (req, res, next) {
+	res.render('todolist', {
+		title: 'Todos',
+		page: 'todos',
+		name: req.user ? req.user.username : '', 
+		displayName: 'N/A (displayName)',
+		username: 'N/A (username)'
+	});
+});
 
 ////////////////////////////////////////////////////
 //				Process Form POSTS
