@@ -65,14 +65,14 @@
 
 					<!-- Account Menu -->
 					<nav id="account-nav">
-					<% if (!name) { %>
+					<% if (!username) { %>
 						<ul class="menu">
 							<li><a class="login<% if (page && page == "login") { %> active<% } %>" href="/login">Login</a></li>
 							<li><a class="register<% if (page && page == "register") { %> active<% } %>" href="/register">Register</a></li>
 						</ul>
 					<% } else { %>
 						<ul class="menu loggedin">
-							<p>Welcome, <%= name %>!</p>
+							<p>Welcome, <%= username %>!</p>
 							<li><a href="" class="dashboard">Dashboard</a>
 								<ul class="sub-menu">
 									<li><a class="contacts<% if (page && page == "contacts" || page == "todos") { %> active<% } %>" href="/contacts">Contacts</a></li>

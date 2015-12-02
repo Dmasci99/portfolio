@@ -22,7 +22,7 @@ router.get('/', function (req, res, next) {
 	res.render('index', { 
 		title: 'Home | MasciApps',
 		page: 'home',
-        name: req.user ? req.user.username : ''
+        username: req.user ? req.user.username : ''
 	 });
 });
 /* GET about page. */
@@ -30,7 +30,7 @@ router.get('/about', function (req, res, next) {
 	res.render('about', { 
 		title: 'About Me | MasciApps',
 		page: 'about',
-        name: req.user ? req.user.username : ''
+        username: req.user ? req.user.username : ''
 	 });
 });
 /* GET projects page. */
@@ -38,7 +38,7 @@ router.get('/projects', function (req, res, next) {
 	res.render('projects', { 
 		title: 'Projects | MasciApps',
 		page: 'projects',
-        name: req.user ? req.user.username : ''
+        username: req.user ? req.user.username : ''
 	 });
 });
 /* GET services page. */
@@ -46,7 +46,7 @@ router.get('/services', function (req, res, next) {
 	res.render('services', { 
 		title: 'Services | MasciApps',
 		page: 'services',
-        name: req.user ? req.user.username : ''
+        username: req.user ? req.user.username : ''
 	 });
 });
 /* GET contact page. */
@@ -54,7 +54,7 @@ router.get('/contact', function (req, res, next) {
 	res.render('contact', { 
 		title: 'Contact Me | MasciApps',
 		page: 'contact',
-        name: req.user ? req.user.username : ''
+        username: req.user ? req.user.username : ''
 	 });
 });
 
@@ -69,7 +69,7 @@ router.get('/login', function(req, res, next) {
 		res.render('login', {
 			title: 'Login | MasciApps',
 			page: 'login',
-			name: req.user ? req.user.username : '',
+			username: req.user ? req.user.username : '',
 			messages: req.flash('loginMessage')
 		});
 	}
@@ -85,7 +85,7 @@ router.get('/register', function(req, res, next) {
 		res.render('register', {
 			title: 'Register | MasciApps',
 			page: 'register',
-			name: req.user ? req.user.username : '',
+			username: req.user ? req.user.username : '',
 			messages: req.flash('registerMessage')
 		});
 	}
@@ -101,9 +101,7 @@ router.get('/todolist', auth.requireAuth, function (req, res, next) {
 	res.render('todolist', {
 		title: 'Todos',
 		page: 'todos',
-		name: req.user ? req.user.username : '', 
-		displayName: 'N/A (displayName)',
-		username: 'N/A (username)'
+		username: req.user ? req.user.username : ''
 	});
 });
 
