@@ -176,6 +176,9 @@
         
         //cancel update
         $scope.cancel = function() {
+            //Why the fuck does this not work?
+            //It forces us to refresh the page when redirecting via .cancel; yet the .update
+            //and .delete work fine, and they are using the exact same piece of code.
             $location.url('/');  
         };
         

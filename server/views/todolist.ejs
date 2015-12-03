@@ -46,7 +46,8 @@
                     <div class="todo" ng-repeat="todo in todos | filter: search | filter: {username: '<%= username %>'}">
                         <input class="todo-complete" type="checkbox" ng-model="todo.completed" title="Toggle Completed">
                         <div class="todo-name">
-                            <span ng-click="edit($index)" ng-show="!editing[$index]" title="Quick-Edit">{{todo.name}}</span>
+                            <span ng-click="edit($index)" ng-show="!editing[$index] && !todo.completed" title="Quick-Edit">{{todo.name}}</span>
+                            <span ng-click="edit($index)" ng-show="!editing[$index] && todo.completed" title="Quick-Edit" class="completed">{{todo.name}}</span>
                             <textarea ng-show="editing[$index]" ng-model="todo.name"></textarea>
                             <div class="icons">
                                 <i class="fa fa-times" ng-show="editing[$index]" ng-click="cancel($index)" title="Cancel Changes"></i>

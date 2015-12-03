@@ -2245,6 +2245,9 @@ header #moby-button:hover .fa {
   padding: 10px;
   margin: 0 40px;
 }
+#todo-list .todos .todo .todo-name span.completed {
+  text-decoration: line-through;
+}
 #todo-list .todos .todo .todo-name span:hover {
   background: #d4cde5;
   cursor: pointer;
