@@ -12,7 +12,7 @@
 
 module.exports = {
 	//Local
-	// 'url':'mongodb://localhost/userDB'
+	'url':'mongodb://localhost/userDB'
 	//MongoLab
-	'url': 'mongodb://<minimasci>:<test>@ds063124.mongolab.com:63124/portfolio'
+	// 'url': 'mongodb://<minimasci>:<test>@ds063124.mongolab.com:63124/portfolio'
 };
