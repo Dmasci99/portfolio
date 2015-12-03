@@ -1,4 +1,3 @@
-<!-- 
 /**
 * Author : Daniel Masci - 200299037
 * Class : Advanced Web Programming
@@ -11,7 +10,6 @@
 * passport plugin. Both LOGIN and REGISTER are included here. This file 
 * also handles errors and provides appropriate messages.
 */ 
--->
 
 
 //Passport strategy

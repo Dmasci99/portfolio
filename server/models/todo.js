@@ -1,5 +1,15 @@
-// Todo Schema
+/**
+* Author : Daniel Masci - 200299037
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Tom Tsiliopolous
+* Purpose : Assignment 3 - Todo Application
+* Website Name : MasciApps
+* 
+* The Following file is the Schema for our Todos.
+*/
 
+// Todo Schema
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

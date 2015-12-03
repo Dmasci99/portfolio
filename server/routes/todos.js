@@ -1,3 +1,16 @@
+/**
+* Author : Daniel Masci - 200299037
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Tom Tsiliopolous
+* Purpose : Assignment 3 - Todo Application
+* Website Name : MasciApps
+* 
+* The Following file is the routing file that processes all of our
+* DB CRUD operations for our Angular Application. Rendering of
+* Todolist Dashboard is done by routes/index.js.
+*/ 
+
 //modules
 var express = require('express'),
     passport = require('passport'),
