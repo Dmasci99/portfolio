@@ -11,5 +11,8 @@
 */
 
 module.exports = {
-	'url':'mongodb://localhost/userDB'
+	//Local
+	// 'url':'mongodb://localhost/userDB'
+	//MongoLab
+	'url': 'mongodb://<minimasci>:<test>@ds063124.mongolab.com:63124/portfolio'
 };
