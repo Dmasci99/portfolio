@@ -31,7 +31,7 @@ router.get('/', auth.requireAuth, function (req, res, next) {
 				title: 'Dashboard - Business Contacts | MasciApps',
 				page: 'contacts',
 				contacts: contacts,
-		        name: req.user ? req.user.username : ''
+		        username: req.user ? req.user.username : ''
 	 		});
 	    }
 	}).sort( { firstName : 1, lastName: 1, email: 1 } ); //Sort the listing by firstName, then lastName, then email in ASCENDING order
@@ -47,7 +47,7 @@ router.get('/add', auth.requireAuth, function (req, res, next) {
 			res.render('contacts/add', {
 				title: 'Add - Business Contacts | MasciApps',
 				page: 'add',
-				name: req.user ? req.user.username : ''
+				username: req.user ? req.user.username : ''
 			});
 	    }
 	});
@@ -74,7 +74,7 @@ router.get('/:id', auth.requireAuth, function (req, res, next) {
 			res.render('contacts/update', {
 				title: 'Update - Business Contacts | MasciApps',
 				page: 'update',
-				name: req.user ? req.user.username : '',
+				username: req.user ? req.user.username : '',
 				contact: contact
 			});		
 		}

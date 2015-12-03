@@ -92,6 +92,7 @@
         $scope.cancel = function(index) {
             //Return without saving any data
             $scope.todos[index] = angular.copy($scope.editing[index]);
+            $scope.editing[index] = false;
         };
         
         //Remove Todo
@@ -134,6 +135,18 @@
             return count;
         };
         
+        //Show an input based on caller
+        $scope.showAddInput = function() {
+            if ($scope.addInput == true) {
+                $scope.addInput = false;
+                $scope.open = false;
+            }                
+            else {
+                $scope.addInput = true;
+                $scope.open = true;
+            }                
+        };
+        
     }]);    
     
     /*****************************************
@@ -159,6 +172,11 @@
                 //of the parameters for Todos.update()?
                 $location.url('/');
             });
+        };
+        
+        //cancel update
+        $scope.cancel = function() {
+            $location.url('/');  
         };
         
         //remove Task

@@ -649,13 +649,15 @@ header {
 					opacity: 0;
 					visibility: hidden;
 					position: absolute;
-					top: 100%;
+					top: calc(~"100% - 1px");
 					left: 0;
 					padding: 10px 0;
 					width: 51%;
 					background: fade(@silver, 80%);
 					border: 2px solid @darkBlue;
 					border-top: none;
+					border-bottom-left-radius: 4px;
+					border-bottom-right-radius: 4px;
 					&::before {
 						opacity: 0;
 						content: "";
@@ -678,6 +680,7 @@ header {
 							.normal;
 							&:hover {
 								.bold;
+								background: fade(@silver, 80%);
 							}
 						}
 					}
@@ -1222,7 +1225,8 @@ header {
 #login-page,
 #register-page,
 #add-contact,
-#update-contact {
+#update-contact,
+#update-todo {
 	form {
 		width: 50%;
 		min-width: 450px;
@@ -1232,6 +1236,14 @@ header {
 		padding: 10px 60px;
 		background: @white;
 		.box-shadow(0, 0, 16px, @grey);
+		.checkbox {
+			input {
+				position: relative;
+				top: 4px;
+				width: 18px;
+				height: 18px;
+			}
+		}//.checkbox
 		.input {
 			input {
 				padding: 5px 10px;
@@ -1240,6 +1252,16 @@ header {
 				width: 100%;
 				border: 2px solid @darkerBlue;
 				.round(4px);
+			}
+			textarea {
+				padding: 5px 10px;
+				margin: 5px 0;
+				background: @white;
+				width: 100%;
+				border: 2px solid @darkerBlue;
+				.round(4px);
+				resize: none;
+				height: 200px;
 			}
 		}//.input
 		.submit {
@@ -1253,6 +1275,9 @@ header {
 				width: 100px;
 				display: inline-block;
 				margin: 5px;
+			}
+			.delete:hover {
+				background: @red;
 			}
 		}//.buttons
 		h2 {
@@ -1333,7 +1358,7 @@ header {
 
 }//.backend-page
 /***********************************									
-*			Backend Pages				
+*		Contacts Dashboard				
 ***********************************/
 #contacts-dashboard {
 	.add-contact {
@@ -1388,6 +1413,8 @@ header {
 			.update {
 				padding: 0;
 				.fa {
+					position: relative;
+					top: 3px;
 					padding: 10px;
 					color: @green;
 				}
@@ -1401,6 +1428,8 @@ header {
 			.delete {
 				padding: 0;
 				.fa {
+					position: relative;
+					top: 3px;
 					padding: 10px;
 					color: @red;
 				}
@@ -1414,6 +1443,126 @@ header {
 		}//table
 	}//.contact-table
 }//#contacts-dashboard
+/***********************************									
+*		   Todo List				
+***********************************/
+#todo-list {
+	.todo-header {
+		background: @darkerBlue;
+		padding: 20px 20px 10px 20px;
+		color: @silver;
+		.todo-remaining {
+			padding-top: 10px;
+			text-align: center;
+			font-size: 20px;
+			.bold;			
+		}//.todo-remaining
+		.todo-search {
+			input {
+				padding: 5px 10px;
+				font-size: 14px;
+				.placeholder(@grey);
+				width: 100%;
+			}
+		}//.todo-search	
+	}//.todo-header
+	.todos {
+		border: 2px solid @darkerBlue;
+		padding: 10px 0;
+		.todo {
+			position: relative;
+			display: block;
+			margin: 2px 0;
+			.todo-complete {
+				position: absolute;
+				left: 15px;
+				top: 50%;
+				.translateY;
+				width: 18px;
+				height: 18px;
+				z-index: 100;
+				cursor: pointer;
+			}//.todo-complete
+			.todo-name {
+				position: relative;
+				display: block;
+				span {
+					display: block;
+					color: @darkerBlue;
+					padding: 10px;
+					margin: 0 40px;
+					&:hover {
+						background: @silver;
+						cursor: pointer;
+					}
+				}
+				textarea {			
+					margin: 0 30px 0 40px;
+					width: calc(~"100% - 80px");
+					padding: 10px;			
+					font-size: 16px;
+					padding-right: 55px;
+					resize: none;	
+					height: 38px;
+				}
+				.icons {
+					position: absolute;
+					right: 60px;
+					top: calc(~"50% - 3px");
+					.translateY;
+					.fa {
+						padding: 0 2px;
+						&:hover {
+							.bold;
+							cursor: pointer;
+						}
+					}
+				}
+			}//.todo-name
+			.todo-edit {
+				position: absolute;
+				top: 50%;
+				.translateY;
+				right: 15px;
+				z-index: 100;
+				.fa {
+					position: relative;
+					display: inline-block;
+					font-size: 18px;
+					&:hover {						
+						.bold;
+						cursor: pointer;
+					}
+				}//.icon
+				a {
+					color: @black;
+				}
+			}//.todo-edit			
+		}//.todo
+		.todo-add {
+			position: relative;
+			.fa {
+				position: absolute;
+				top: 10px;
+				right: 15px;
+				font-size: 18px;
+				cursor: pointer;
+				&:hover {
+					.bold;
+				}
+			}
+			input {	
+				margin: 0 40px;
+				width: calc(~"100% - 80px");
+				padding: 10px;			
+				font-size: 16px;
+				background: @silver;
+				.placeholder(@darkerBlue);
+			}
+		}//.todo-add
+	}//.todos	
+}//#todos-dashboard
+
 
 /****************************************************************************************************
 *																									*
