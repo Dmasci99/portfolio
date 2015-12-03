@@ -1,4 +1,3 @@
-<!-- 
 /**
 * Author : Daniel Masci - 200299037
 * Class : Advanced Web Programming
@@ -11,25 +10,17 @@
 * subpages. This file includes user authentication and is therefore
 * restricted. It handles ADD / UPDATE / DELETE for our Business Contacts.
 */ 
--->
 
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 
-var Contact = require('../models/contact');
+var auth = require('../config/auth.js');
+var Contact = require('../models/contact.js');
 
-//Check if user is authenticated
-function requireAuth(req, res, next) {
-	//check if user is logged in
-	if (!req.isAuthenticated()){
-		res.redirect('/login');
-	}
-	next();
-}
 
 /* GET contacts "Dashboard" page. */
-router.get('/', requireAuth, function (req, res, next) {
+router.get('/', auth.requireAuth, function (req, res, next) {
 	Contact.find(function (err, contacts) {
 		if (err) {
 			console.log(err);
@@ -38,15 +29,15 @@ router.get('/', requireAuth, function (req, res, next) {
 		else {
 			res.render('contacts/index', { 
 				title: 'Dashboard - Business Contacts | MasciApps',
-				page: 'dashboard',
+				page: 'contacts',
 				contacts: contacts,
-		        name: req.user ? req.user.username : ''
+		        username: req.user ? req.user.username : ''
 	 		});
 	    }
 	}).sort( { firstName : 1, lastName: 1, email: 1 } ); //Sort the listing by firstName, then lastName, then email in ASCENDING order
 });
 /* GET contacts "Add Contact" page. */
-router.get('/add', requireAuth, function (req, res, next) {
+router.get('/add', auth.requireAuth, function (req, res, next) {
 	Contact.find(function (err, contacts) {
 		if (err) {
 			console.log(err);
@@ -56,17 +47,17 @@ router.get('/add', requireAuth, function (req, res, next) {
 			res.render('contacts/add', {
 				title: 'Add - Business Contacts | MasciApps',
 				page: 'add',
-				name: req.user ? req.user.username : ''
+				username: req.user ? req.user.username : ''
 			});
 	    }
 	});
 });
 /* Redirect from /contacts/update to /contacts. */
-router.get('/update', requireAuth, function (req, res, next) {
+router.get('/update', auth.requireAuth, function (req, res, next) {
 	res.redirect('/contacts');
 });
 /* GET contacts "Update Contact" page. */
-router.get('/:id', requireAuth, function (req, res, next) {
+router.get('/:id', auth.requireAuth, function (req, res, next) {
 
 	//grab Contact ID
 	var id = req.params.id;
@@ -83,7 +74,7 @@ router.get('/:id', requireAuth, function (req, res, next) {
 			res.render('contacts/update', {
 				title: 'Update - Business Contacts | MasciApps',
 				page: 'update',
-				name: req.user ? req.user.username : '',
+				username: req.user ? req.user.username : '',
 				contact: contact
 			});		
 		}
@@ -91,7 +82,7 @@ router.get('/:id', requireAuth, function (req, res, next) {
 });
 
 /* GET - Process "Delete Contact" */
-router.get('/delete/:id', function (req, res, next) {
+router.get('/delete/:id', auth.requireAuth, function (req, res, next) {
 
 	//grab Contact ID
 	var id = req.params.id;

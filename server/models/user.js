@@ -1,4 +1,3 @@
-<!-- 
 /**
 * Author : Daniel Masci - 200299037
 * Class : Advanced Web Programming
@@ -11,7 +10,6 @@
 * account information for people to login to the secured backend 
 * of the website.
 */ 
--->
 
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');

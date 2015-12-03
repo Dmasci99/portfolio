@@ -1,0 +1,102 @@
+<!--
+/**
+* Author : Daniel Masci - 200299037
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Rich Freeman / Tom Tsiliopolous
+* Purpose : Assignment 3 - Todo Application
+* Website Name : MasciApps
+* 
+* The Following page is the View for the "Todo List" page.
+*/
+-->
+
+<% include partials/header.ejs %>
+    
+    <div class="interior-header" style="background-image: url(../images/header-background.jpg)">
+        <div class="container">
+            <h1>Todo List</h1>
+        </div>
+    </div><!-- interior-header -->
+    
+    <div class="interior-page backend-page todos-backend" id="todos-dashboard">
+        
+        <ng-view></ng-view>
+        
+    </div><!-- #todos-dashboard -->
+    
+    <script type="text/ng-template" id="/todos.html">
+        
+        <div class="container" ng-init="setUserName('<%= username %>')">
+        
+            <div class="todo-content" id="todo-list">
+            
+                <div class="todo-header">
+                    <div class="todo-search">
+                        <input type="text" ng-model="search.name" id="searchTodo" placeholder="Search..." autofocus>
+                    </div><!-- todo-search -->
+                    <div class="todo-remaining">
+                        <span class="number">{{remainingTodos()}}</span> /  
+                        <span class="number">{{totalTodos()}}</span>
+                        remaining                
+                    </div><!-- todo-remaining -->
+                </div><!-- todo-head -->
+                    
+                <div class="todos">
+                    <div class="todo" ng-repeat="todo in todos | filter: search | filter: {username: '<%= username %>'}">
+                        <input class="todo-complete" type="checkbox" ng-model="todo.completed" title="Toggle Completed">
+                        <div class="todo-name">
+                            <span ng-click="edit($index)" ng-show="!editing[$index] && !todo.completed" title="Quick-Edit">{{todo.name}}</span>
+                            <span ng-click="edit($index)" ng-show="!editing[$index] && todo.completed" title="Quick-Edit" class="completed">{{todo.name}}</span>
+                            <textarea ng-show="editing[$index]" ng-model="todo.name"></textarea>
+                            <div class="icons">
+                                <i class="fa fa-times" ng-show="editing[$index]" ng-click="cancel($index)" title="Cancel Changes"></i>
+                                <i class="fa fa-trash-o" ng-show="editing[$index]" ng-click="remove($index)" title="Remove Todo"></i>
+                            </div><!-- icons -->
+                        </div><!-- todo-name -->
+                        <div class="todo-edit">
+                            <a href="#/{{todo._id}}"><i class="fa fa-share-square-o" ng-show="!editing[$index]" title="Edit Single Todo"></i></a>
+                            <i class="fa fa-check" ng-show="editing[$index]" ng-click="update($index)" title="Accept Changes"></i>      
+                        </div><!-- todo-edit -->                        
+                    </div><!-- todo -->                                             
+                    <div class="todo-add">
+                        <input type="text" ng-model="newTodo" placeholder="Add a new Todo">
+                        <i class="fa fa-check" ng-click="save()"></i>
+                    </div><!-- todo-add -->
+                </div><!-- todos -->   
+                
+            </div><!-- todo-content -->
+            
+        </div><!-- container -->
+    
+    </script>
+    
+    <script type="text/ng-template" id="/todoDetails.html">
+    
+        <div class="container" id="update-todo">
+        
+            <form ng-model="todos">
+                <div class="exit"><a href=""><i class="fa fa-times" ng-click="cancel()"></i></a></div>
+                <h2>Edit Todo</h2>
+                <div class="checkbox">
+                    <span>Completed : </span> 
+                    <input type="checkbox" ng-model="todo.completed">
+                </div>
+                <div class="input">
+                    <input type="text" ng-model="todo.name" placeholder="Todo Name...">
+                </div>
+                <div class="input">
+                    <textarea ng-model="todo.note" placeholder="Enter Notes Here..." autofocus></textarea>
+                </div>
+                <div class="buttons">
+                    <span class="update" ng-click="update($index)">Update</span>
+                    <span class="delete" ng-click="remove($index)">Delete</span>
+                </div>
+            </form>
+
+        </div><!-- container -->
+    
+    </script>
+
+<% include partials/nglib.ejs %>
+<% include partials/footer.ejs %>

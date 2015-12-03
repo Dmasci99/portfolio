@@ -25,6 +25,7 @@ mongoose.connection.once('open', function(callback) {
 
 var routes = require('./server/routes/index');
 var contacts = require('./server/routes/contacts');
+var todos = require('./server/routes/todos');
 
 var app = express();
 
@@ -58,6 +59,7 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/contacts', contacts);
+app.use('/todos', todos);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -74,6 +76,9 @@ if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
+      title: '404 | MasciApps',
+      page: '404',
+      username: req.user ? req.body.username : '',
       message: err.message,
       error: err
     });
@@ -85,6 +90,9 @@ if (app.get('env') === 'development') {
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
+    title: '404 | MasciApps',
+    page: '404',
+    username: req.user ? req.body.username : '',
     message: err.message,
     error: {}
   });

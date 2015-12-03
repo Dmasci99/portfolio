@@ -1,4 +1,3 @@
-<!-- 
 /**
 * Author : Daniel Masci - 200299037
 * Class : Advanced Web Programming
@@ -11,7 +10,6 @@
 * information about the Business Partners we will be displaying
 * on the secured backend of the website.
 */ 
--->
 
 var mongoose = require('mongoose');
 

@@ -1,3 +1,35 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!-- 
+/**
+* Author : Daniel Masci - 200299037
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Rich Freeman / Tom Tsiliopolous
+* Purpose : Assignment 3 - Todo Application
+* Website Name : MasciApps
+* 
+* The Following page is my custom View for 404 errors page.
+* At this point, it still outputs the stack to the screen 
+* (for easier debugging during development).
+*/ 
+-->
+
+
+<%- include ./partials/header.ejs %>
+
+<div class="interior-header" style="background-image: url(../images/slide4.jpg)">
+	<div class="container">
+		<h1>Page Not Found</h1>
+	</div>
+</div><!-- interior-header -->
+
+<div class="interior-page" id="login-page">
+
+	<div class="four-oh-four">
+		<h1><%= message %></h1>
+		<h2><%= error.status %></h2>
+		<pre><%= error.stack %></pre>
+	</div>
+
+</div><!-- #login-page -->
+
+<%- include ./partials/footer.ejs %>
